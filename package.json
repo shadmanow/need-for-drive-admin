@@ -7,7 +7,8 @@
     "start": "set MODE=development && webpack serve",
     "start:production": "set MODE=production && webpack serve",
     "build": "set MODE=production && webpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [],
   "author": "Stepan <github.com/shadmanow>",
