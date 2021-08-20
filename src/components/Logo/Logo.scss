@@ -1,0 +1,20 @@
+@import "@assets/styles/var";
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__image {
+    width: 45px;
+    height: 45px;
+    margin-right: 12px;
+  }
+
+  &__text {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    color: $lightBlack-color;
+  }
+}

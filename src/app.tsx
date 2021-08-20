@@ -1,11 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-const App: React.FC = () => {
-  return (
-    <div>
-      <h1>Admin panel</h1>
-    </div>
-  )
-}
+import LoginPage from './pages/LoginPage/LoginPage';
 
-export default App
+const App: React.FC = () => (
+  <Switch>
+    <Route path='/' component={LoginPage} />
+  </Switch>
+);
+
+export default App;

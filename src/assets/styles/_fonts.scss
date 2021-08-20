@@ -1,0 +1,15 @@
+@font-face { 
+    font-family: "Helvetica";
+    font-weight: bold;
+    src: url(@assets/fonts/HelveticaBold.eot?) format("eot"), 
+         url(@assets/fonts/HelveticaBold.woff) format("woff"), 
+         url(@assets/fonts/HelveticaBold.ttf) format("truetype");
+}
+
+@font-face { 
+    font-family: "Helvetica";
+    font-weight: 400;
+    src: url(@assets/fonts/HelveticaRegular.eot?) format("eot"), 
+         url(@assets/fonts/HelveticaRegular.woff) format("woff"), 
+         url(@assets/fonts/HelveticaRegular.ttf) format("truetype");
+}

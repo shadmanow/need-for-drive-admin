@@ -1,0 +1,48 @@
+@import "@assets/styles/fonts";
+@import "@assets/styles/reset";
+@import "@assets/styles/var";
+
+html {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "Helvetica", sans-serif;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: $blue-color;
+  font-weight: 400;
+  font-size: 11.5px;
+  line-height: 12px;
+  letter-spacing: -0.18421px;
+
+  &:hover {
+    color: $lightBlue-color;
+  }
+  &:active {
+    color: $blue-color;
+  }
+}
+
+a,
+input,
+button {
+  font-family: inherit;
+}
