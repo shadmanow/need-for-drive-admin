@@ -4,7 +4,7 @@ const path = require("path");
 const SRC = path.resolve(__dirname, "./src");
 const DIST = path.resolve(__dirname, "./build");
 const MODE = process.env.MODE.trim();
-const PUBLIC_PATH = MODE === 'production' ? '/admin-panel/' : '/'
+const PUBLIC_PATH = MODE === 'production' ? '/need-for-drive-admin/' : '/'
 
 //plugins
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -24,11 +24,7 @@ module.exports = {
       {
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: "babel-loader",
-          },
-        ],
+        use: ["babel-loader", "eslint-loader"]
       },
       {
         test: /\.(ttf)$/,
@@ -57,7 +53,7 @@ module.exports = {
           {
             loader: "postcss-loader",
             options: {
-              postCssOptions: {
+              postcssOptions: {
                 plugins: ["autoprefixer"],
               },
             },
@@ -72,7 +68,7 @@ module.exports = {
           {
             loader: "postcss-loader",
             options: {
-              postCssOptions: {
+              postcssOptions: {
                 plugins: ["autoprefixer"],
               },
             },
