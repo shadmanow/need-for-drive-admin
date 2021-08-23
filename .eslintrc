@@ -33,7 +33,13 @@
     "prettier/prettier": [
       "error",
       {
-        "endOfLine": "auto"
+        "max-len": [
+          "error",
+          140,
+          2
+        ],
+        "endOfLine": "auto",
+        "trailingComma": "none"
       }
     ],
     "import/prefer-default-export": "off",

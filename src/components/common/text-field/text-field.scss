@@ -25,6 +25,7 @@
     border: 0.5px solid $border-color;
     box-sizing: border-box;
     border-radius: 3px;
+    transition: .5s border;
 
     &:focus {
       outline: none;
@@ -33,5 +34,9 @@
     &::placeholder {
       font-size: 12px;
     }
+  }
+
+  &__input_error {
+    border-bottom: 0.5px solid $red-color;
   }
 }
