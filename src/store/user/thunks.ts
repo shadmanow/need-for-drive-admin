@@ -34,7 +34,7 @@ export const loginUser =
       cookies.save('user', { accessToken, refreshToken }, { path: '/' });
 
       dispatch(loginSuccessAction(accessToken, refreshToken));
-      dispatch(alertShow('Вы успешно вошли.', 'success'));
+      dispatch(alertShow('Вы успешно вошли', 'success'));
       dispatch(loadingStop());
     } catch (e) {
       dispatch(loadingStop());

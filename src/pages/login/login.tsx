@@ -12,7 +12,11 @@ export const Login: FC = (): JSX.Element => {
   const [form, setForm] = useState({ username: '', password: '' });
   const dispatch = useDispatch();
 
-  const handleClick = () => dispatch(loginUser(form));
+  const handleClick = () => {
+    if (form.username && form.password) {
+      dispatch(loginUser(form));
+    }
+  };
 
   return (
     <div className='login'>
