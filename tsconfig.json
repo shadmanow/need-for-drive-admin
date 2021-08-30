@@ -19,6 +19,11 @@
     "rootDir": "./src",
     "paths": {
       "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@store/*": ["src/store/*"],
+      "@pages/*": ["src/pages/*"],
+      "@api/*": ["src/api/*"],
+      "@hooks/*": ["src/hooks/*"],
     },
   },
   "include": [
