@@ -1,0 +1,13 @@
+.alert-container {
+  overflow: hidden;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+
+  display: flex;
+  flex-direction: column-reverse;
+
+  & > * {
+    margin-bottom: 10px;
+  }
+}

@@ -7,7 +7,7 @@ const MODE = process.env.MODE.trim();
 const IS_DEV = MODE === 'development';
 const PUBLIC_PATH = IS_DEV ? '/' : '/need-for-drive-admin/';
 
-//plugins
+// plugins
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');

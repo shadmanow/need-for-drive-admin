@@ -1,17 +1,18 @@
 import React, { FC, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
+import { loginUser } from '@store/user/thunks';
+
+import './login.scss';
 import Logo from '@components/logo';
 import TextField from '@components/common/text-field';
 import Button from '@components/common/button';
-import useActions from '@hooks/useActions';
 
-import './login.scss';
-
-export const Login: FC = () => {
-  const { TryLogin } = useActions();
+export const Login: FC = (): JSX.Element => {
   const [form, setForm] = useState({ username: '', password: '' });
+  const dispatch = useDispatch();
 
-  const handleClick = () => TryLogin(form);
+  const handleClick = () => dispatch(loginUser(form));
 
   return (
     <div className='login'>

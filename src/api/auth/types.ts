@@ -1,4 +1,4 @@
-export interface LoginResponseData {
+export interface LoginResponse {
   data: {
     token_type: string;
     access_token: string;
@@ -8,7 +8,7 @@ export interface LoginResponseData {
   };
 }
 
-export interface LoginRequestData {
+export interface LoginParams {
   username: string;
   password: string;
 }
@@ -16,4 +16,10 @@ export interface LoginRequestData {
 export interface LoginData {
   accessToken: string;
   refreshToken: string;
+}
+
+export class LoginUnauthorizedError extends Error {
+  constructor() {
+    super(undefined);
+  }
 }
