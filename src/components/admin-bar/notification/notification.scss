@@ -1,0 +1,27 @@
+@import "@assets/styles/var";
+
+.notification {
+  position: relative;
+  // border: 0.5px solid $border-gray-color;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__count {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    font-weight: bold;
+    font-size: 9px;
+    color: $background-block-color;
+    background-color: $danger-color;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: calc(50% - 17px);
+    right: 17px;
+  }
+}

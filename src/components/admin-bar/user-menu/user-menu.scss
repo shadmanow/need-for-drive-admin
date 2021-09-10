@@ -1,0 +1,82 @@
+@import "@assets/styles/var";
+
+.user-menu {
+  width: 100%;
+  height: 68px;
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  justify-items: center;
+  align-items: center;
+
+  padding-left: 27px;
+  padding-right: 23px;
+
+  &__name,
+  &__icon,
+  &__dropdown-icon {
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__name {
+    justify-self: start;
+    margin-left: 14px;
+    font-size: 15px;
+  }
+
+  &__icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  &__dropdown {
+    border: 1px solid $border-gray-color;
+    background-color: $background-block-color;
+    width: 100%;
+    max-height: 300px;
+    position: absolute;
+    overflow: hidden;
+    top: 100%;
+    transition: 0.5s;
+  }
+
+  &__dropdown_closed {
+    opacity: 0;
+    max-height: 0;
+  }
+
+  &__dropdown-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+    color: $text-black-dark-color;
+
+    &:hover {
+      opacity: 1;
+      background-color: $background-block-active-color;
+    }
+  }
+}
+
+.user-menu {
+  @media screen and (max-width: $tablet-min-size - 1) {
+    height: 55px;
+    
+    &__icon {
+      width: 30px;
+      height: 30px;
+    }
+    &__name {
+      font-size: 14px;
+    }
+    &__dropdown-button {
+      font-size: 14px;
+    }
+  }
+}

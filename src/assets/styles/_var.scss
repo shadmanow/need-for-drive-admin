@@ -1,13 +1,24 @@
-$lightGray-color: #F5F6F8;
-$white-color: #FFFFFF;
-$blue-color: #007BFF;
-$lightBlue-color: #00c3ff;
-$red-color: crimson;
+$desktop-size: 1440px;
+$desktop-min-size: 1024px;
+$tablet-min-size: 768px;
+$mobile-min-size: 320px;
 
-$background-loader: rgba(220, 220, 220, 0.7);
+$background-main-color: #F5F6F8;
+$background-main-dark-color: rgba(220, 220, 220, 0.92);
+$background-block-color: #FFFFFF;
+$background-block-active-color: #fbfbfb;
 
-$border-color:  #BECAD6;
+$danger-color: #C4183C;
+$success-color: #007BFF;
 
-$lightBlack-color: #3D5170;
-$black-color: #495057;
-$darkBlack-color: #121212;
+$boxshadow-color: #e1e5eb;
+
+$border-green-color: #0EC261;
+$border-gray-color:  #BECAD6;
+$border-gray-dark-color: #999999;
+
+$text-white-color: #FFFFFF;
+$text-black-color: #495057;
+$text-black-light-color: #3D5170;
+$text-black-dark-color: #121212;
+$text-gray-color: #868E96;

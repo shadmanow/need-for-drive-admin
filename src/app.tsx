@@ -7,9 +7,9 @@ import { selectAuth } from '@store/selectors';
 import { checkUser } from '@store/user/thunks';
 
 import Login from '@pages/login';
-import Orders from '@pages/orders';
 import Loader from '@components/loader';
 import Alert from '@components/alert';
+import Admin from '@pages/admin';
 
 const App: FC = (): JSX.Element => {
   const { isLoggedIn } = useAppSelector(selectAuth);
@@ -26,8 +26,7 @@ const App: FC = (): JSX.Element => {
       <Switch>
         {isLoggedIn ? (
           <>
-            <Route path='/admin/orders' component={Orders} />
-            <Redirect from='/admin/*' to='/admin/orders' />
+            <Route path='/admin' component={Admin} />
           </>
         ) : (
           <>

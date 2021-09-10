@@ -15,6 +15,11 @@ export const Loader: FC = (): JSX.Element | null => {
   return (
     <div className='loader'>
       <LoadingImage className='loader__icon' />
+      <div className='loader__list'>
+        {loading.map((_loading) => (
+          <span key={`${_loading}`}>{_loading}</span>
+        ))}
+      </div>
       <span className='loader__text'>Подождите...</span>
     </div>
   );

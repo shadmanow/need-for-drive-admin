@@ -20,6 +20,17 @@ body {
   box-sizing: inherit;
 }
 
+*::-webkit-scrollbar {
+  background: $background-block-active-color;
+  border-left: 1px solid $border-gray-color;
+  width: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: $text-gray-color;
+  border-radius: 2px;
+}
+
 #root {
   width: 100%;
   height: 100%;
@@ -27,22 +38,24 @@ body {
 
 a {
   text-decoration: none;
-  color: $blue-color;
+  color: $success-color;
   font-weight: 400;
   font-size: 11.5px;
   line-height: 12px;
   letter-spacing: -0.18421px;
 
   &:hover {
-    color: $lightBlue-color;
+    opacity: 0.8;
   }
   &:active {
-    color: $blue-color;
+    color: $success-color;
   }
 }
 
 a,
 input,
-button {
+button,
+select,
+option {
   font-family: inherit;
 }

@@ -5,8 +5,22 @@
   height: 30px;
   border: none;
 
-  background: $blue-color;
-  border: 0.5px solid $blue-color;
+  &.button_default {
+    color: $text-white-color;
+    background: $success-color;
+    border: 0.5px solid $success-color;
+  }
+
+  &.button_outlined {
+    border: 0.5px solid $border-gray-dark-color;
+    color: $text-black-light-color;
+    background: none;
+  }
+
+  &:disabled {
+    color: $border-gray-color;
+  }
+
   border-radius: 4px;
 
   font-weight: 400;
@@ -16,10 +30,10 @@
   align-items: center;
   justify-content: center;
   letter-spacing: -0.0821429px;
-  color: $white-color;
-  cursor: pointer;
   
+  cursor: pointer;
+
   &:hover {
-    opacity: .9;
+    opacity: 0.9;
   }
 }

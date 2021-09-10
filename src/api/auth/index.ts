@@ -8,12 +8,12 @@ import {
   LoginUnauthorizedError
 } from './types';
 
-export const login = async (data: LoginParams): Promise<LoginData> => {
+export const login = async (params: LoginParams): Promise<LoginData> => {
   try {
     const response: LoginResponse = await baseApi.request({
       method: 'POST',
-      url: '/auth/login',
-      data,
+      url: '/api/auth/login',
+      data: params,
       headers: {
         ...baseApi.defaults.headers,
         Authorization: `Basic ${process.env.REACT_APP_API_BASIC_TOKEN}`

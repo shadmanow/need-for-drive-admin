@@ -20,10 +20,10 @@ export const Login: FC = (): JSX.Element => {
 
   return (
     <div className='login'>
-      <Logo text='Need for drive' />
+      <Logo />
 
-      <div className='login-form'>
-        <span className='login-form__title'>Вход</span>
+      <div className='login__form'>
+        <span className='login__title'>Вход</span>
 
         <TextField
           label='Почта'
@@ -41,7 +41,7 @@ export const Login: FC = (): JSX.Element => {
           onChange={(password) => setForm({ ...form, password })}
         />
 
-        <div className='login-form__footer'>
+        <div className='login__footer'>
           <a href='/#'>Запросить доступ</a>
           <Button value='Войти' onClick={handleClick} />
         </div>

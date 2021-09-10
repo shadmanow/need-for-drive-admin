@@ -6,3 +6,7 @@ declare module '*.svg' {
 }
 declare module '*.png';
 declare module '*.jpg';
+
+declare type Entries<T> = {
+  [K in keyof T]: [K, T[K]];
+}[keyof T][];
