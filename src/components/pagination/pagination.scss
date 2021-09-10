@@ -1,6 +1,7 @@
 @import "@assets/styles/var";
 
 .pagination {
+  max-width: 250px;
   font-weight: 400;
   font-size: 15px;
   line-height: 17px;
@@ -9,14 +10,10 @@
   color: $success-color;
 
   display: flex;
-
-  & > * {
-    margin: 0 2.5px;
-  }
+  justify-content: space-between;
 
   span {
-    width: 18px;
-    height: 18px;
+    padding: 2px 7px;
     display: flex;
     align-items: center;
     justify-content: center;

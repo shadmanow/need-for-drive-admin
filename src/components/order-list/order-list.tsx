@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 
 import { Order } from '@store/order/types';
 
@@ -9,6 +9,11 @@ import { INITIAL_SLIZE } from './constants';
 
 export const OrderList: FC<{ orders: Order[] }> = ({ orders }) => {
   const [curPage, setCurPage] = useState(1);
+
+  useEffect(() => {
+    setCurPage(1);
+  }, [orders]);
+
   return (
     <div className='order-list'>
       {orders

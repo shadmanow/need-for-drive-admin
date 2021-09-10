@@ -22,10 +22,11 @@ export const Pagination: FC<PaginationProps> = ({
     onSelect(newPage);
   };
 
-  useEffect(
-    () => setCurPages(getPages(curPage, countPages)),
-    [curPage, countPages]
-  );
+  useEffect(() => {
+    setCurPages(getPages(curPage, countPages));
+  }, [curPage, countPages]);
+
+  useEffect(() => setCurPage(currentPage), [currentPage]);
 
   return (
     <div className='pagination'>
