@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { getEntries } from '@utils';
@@ -7,33 +7,25 @@ import { Order } from '@store/order/types';
 import { setFilter } from '@store/filter/thunks';
 import { selectCars, selectCities } from '@store/selectors';
 import { useAppSelector } from '@store/hooks';
-import { OrderStatusIds } from '@store/constants';
 
-import './order-filters.scss';
 import Select from '@components/common/select';
 import Button from '@components/common/button';
-import { FILTER_ORDERS } from './constants';
+
+import './order-filters.scss';
+import { FILTER_ORDERS, STATUSES, TIMES } from './constants';
 
 export const OrderFilters: FC = (): JSX.Element => {
   const { cities } = useAppSelector(selectCities);
   const { cars } = useAppSelector(selectCars);
 
-  const CARS = ['Выбрать модель', ...new Set(cars.map((car) => car.name))];
-  const CITIES = ['Выбрать Город', ...cities.map((city) => city.name)];
-
-  const TIMES = {
-    ALL: 'За все время',
-    MONTH: 'За месяц',
-    WEEK: 'За неделю'
-  };
-
-  const STATUSES = {
-    ALL: 'Выбрать статус',
-    NEW: OrderStatusIds.NEW.name,
-    CONFIRMED: OrderStatusIds.CONFIRMED.name,
-    CANCELED: OrderStatusIds.CANCELED.name,
-    TEMPRORARY: OrderStatusIds.TEMPRORARY.name
-  };
+  const CARS = useMemo(
+    () => ['Выбрать модель', ...new Set(cars.map((car) => car.name))],
+    [cars]
+  );
+  const CITIES = useMemo(
+    () => ['Выбрать Город', ...cities.map((city) => city.name)],
+    [cities]
+  );
 
   const dispatch = useDispatch();
   const [selects, setSelects] = useState({
@@ -63,6 +55,9 @@ export const OrderFilters: FC = (): JSX.Element => {
     return true;
   };
 
+  const handleSelectChange = (values: { name: string; value: string }) =>
+    setSelects({ ...selects, [values.name]: values.value });
+
   const handleConfirm = () => {
     dispatch(
       setFilter(
@@ -81,22 +76,26 @@ export const OrderFilters: FC = (): JSX.Element => {
       <Select
         defaultValue={selects.time}
         values={getEntries(TIMES).map(([, time]) => time)}
-        onSelect={(time: string) => setSelects({ ...selects, time })}
+        name='time'
+        onSelect={handleSelectChange}
       />
       <Select
         defaultValue={selects.car}
         values={CARS}
-        onSelect={(car: string) => setSelects({ ...selects, car })}
+        name='car'
+        onSelect={handleSelectChange}
       />
       <Select
         defaultValue={selects.city}
         values={CITIES}
-        onSelect={(city: string) => setSelects({ ...selects, city })}
+        name='city'
+        onSelect={handleSelectChange}
       />
       <Select
         defaultValue={selects.status}
         values={getEntries(STATUSES).map(([, status]) => status)}
-        onSelect={(status: string) => setSelects({ ...selects, status })}
+        name='status'
+        onSelect={handleSelectChange}
       />
       <Button value='Применить' onClick={handleConfirm} />
     </div>

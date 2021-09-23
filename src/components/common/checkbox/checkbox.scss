@@ -58,14 +58,17 @@
     border: 1px solid $border-green-color;
   }
 
-  &__input:disabled + &__label:before, &__label:hover:before {
-    content: "";
-    display: inline-block;
-    min-width: 12px;
-    min-height: 12px;
-    margin-right: 8px;
-    opacity: 1;
-    border: 1px solid $border-gray-dark-color;
+  &__input:disabled + &__label {
+    :before,
+    :hover:before {
+      content: "";
+      display: inline-block;
+      min-width: 12px;
+      min-height: 12px;
+      margin-right: 8px;
+      opacity: 1;
+      border: 1px solid $border-gray-dark-color;
+    }
   }
 
   &__input:checked + &__label {

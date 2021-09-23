@@ -9,9 +9,9 @@ import Button from '@components/common/button';
 import { useDispatch } from 'react-redux';
 import { clearError } from '@store/error/thunks';
 
-export const ErrorBoundary: FC<{ children: JSX.Element | JSX.Element[] }> = ({
+export const ErrorBoundary: FC<{ children?: JSX.Element | JSX.Element[] }> = ({
   children
-}): JSX.Element => {
+}) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { lastError } = useAppSelector(selectError);
@@ -22,7 +22,7 @@ export const ErrorBoundary: FC<{ children: JSX.Element | JSX.Element[] }> = ({
         dispatch(clearError());
       };
     }
-    return () => {};
+    return undefined;
   }, []);
 
   if (lastError?.status === 500) {
@@ -38,5 +38,5 @@ export const ErrorBoundary: FC<{ children: JSX.Element | JSX.Element[] }> = ({
     );
   }
 
-  return <>{children}</>;
+  return children as JSX.Element;
 };

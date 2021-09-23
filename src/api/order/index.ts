@@ -2,7 +2,9 @@ import baseApi from '../base';
 import { FetchOrdersResponse, FetchOrdersData } from './types';
 
 export const fetchOrders = async (): Promise<FetchOrdersData> => {
-  const response: FetchOrdersResponse = await baseApi.get('/api/db/order');
+  const response: FetchOrdersResponse = await baseApi.get(
+    '/api/db/order?limit=5'
+  );
   return {
     orders: response.data.data.map((order) => {
       const { carId } = order;

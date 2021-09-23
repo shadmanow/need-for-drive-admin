@@ -1,5 +1,6 @@
 export interface SelectProps {
   defaultValue: string;
   values: string[];
-  onSelect: (value: string) => void;
+  onSelect: (select: { name: string; value: string }) => void;
+  name?: string;
 }

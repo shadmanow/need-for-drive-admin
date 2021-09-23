@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 import { SelectProps } from './types';
 
 import './select.scss';
@@ -6,16 +6,21 @@ import './select.scss';
 export const Select: FC<SelectProps> = ({
   defaultValue,
   values,
-  onSelect
-}): JSX.Element => (
-  <select
-    className='select'
-    value={defaultValue}
-    onChange={(event: any) => onSelect(event.target.value)}
-  >
-    {values?.length &&
-      values.map((value) => (
+  onSelect,
+  name
+}): JSX.Element => {
+  const handleChange = (event: ChangeEvent<HTMLSelectElement>) =>
+    onSelect({ name: event.target.name, value: event.target.value });
+  return (
+    <select
+      className='select'
+      value={defaultValue}
+      name={name}
+      onChange={handleChange}
+    >
+      {values.map((value) => (
         <option key={`${defaultValue}-${value}`}>{value}</option>
       ))}
-  </select>
-);
+    </select>
+  );
+};

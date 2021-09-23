@@ -2,8 +2,9 @@ import React, { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 
-import OpenMenu from '@assets/images/svg/menu.svg';
-import CloseMenu from '@assets/images/svg/close.svg';
+import menuOpen from '@assets/images/svg/menu-open.svg';
+import menuClose from '@assets/images/svg/menu-close.svg';
+
 import Logo from '@components/logo';
 import { links } from '@constants/links';
 
@@ -20,11 +21,9 @@ export const Sidebar: FC = () => {
 
   return (
     <div className='sidebar'>
-      {isOpen ? (
-        <CloseMenu className='sidebar__image' onClick={handleClick} />
-      ) : (
-        <OpenMenu className='sidebar__image' onClick={handleClick} />
-      )}
+      <button onClick={handleClick} className='sidebar__menu' type='button'>
+        <img src={isOpen ? menuClose : menuOpen} alt='menu-open-icon' />
+      </button>
       <div className='sidebar__header'>
         <Logo />
       </div>

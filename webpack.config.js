@@ -36,7 +36,7 @@ module.exports = {
       {
         test: /\.(ts|tsx)?$/,
         exclude: /node_modules/,
-        use: ['babel-loader', 'eslint-loader']
+        use: ['babel-loader']
       },
       {
         test: /\.(ttf|eot|woff)$/,
@@ -64,8 +64,12 @@ module.exports = {
                 }
               }
             }
+          },
+          {
+            loader: 'file-loader'
           }
         ],
+        type: 'javascript/auto',
         issuer: /\.(ts|js)x?$/
       },
       {

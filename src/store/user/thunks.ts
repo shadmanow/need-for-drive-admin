@@ -1,7 +1,7 @@
 import cookies from 'react-cookies';
 import { Dispatch } from 'redux';
 import { login } from '@api/auth';
-import { LoginParams, LoginUnauthorizedError } from '@api/auth/types';
+import { LoginParams, UnauthorizedError } from '@api/auth/types';
 
 import { alertShow } from '@store/alert/thunks';
 import { loadingStart, loadingStop } from '@store/loading/thunks';
@@ -36,10 +36,10 @@ export const loginUser =
       dispatch(loginSuccessAction(accessToken, refreshToken));
       dispatch(alertShow('Вы успешно вошли', 'success'));
       dispatch(loadingStop());
-    } catch (e) {
+    } catch (authError) {
       dispatch(loadingStop());
       dispatch(loginFailureAction());
-      if (e instanceof LoginUnauthorizedError) {
+      if (authError instanceof UnauthorizedError) {
         dispatch(alertShow('Неверная почта или пароль', 'error'));
       } else {
         dispatch(alertShow('Неизвестная ошибка', 'error'));

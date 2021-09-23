@@ -1,9 +1,10 @@
 import { Dispatch } from 'redux';
 
+import { fetchCars } from '@api/car';
+
 import { loadingStart, loadingStop } from '@store/loading/thunks';
 import { alertShow } from '@store/alert/thunks';
 
-import { fetchCars } from '@api/car';
 import { Car, CarActionTypes, SetCarsAction } from './types';
 
 const setCarsAction = (cars: Car[]): SetCarsAction => ({
@@ -17,9 +18,9 @@ export const getCars = () => async (dispatch: Dispatch<any>) => {
     const { cars } = await fetchCars();
     dispatch(setCarsAction(cars));
     dispatch(loadingStop('Загрузка моделей...'));
-  } catch (e: any) {
+  } catch (fetchCarsError) {
     dispatch(loadingStop('Загрузка моделей...'));
     dispatch(alertShow('Не удалось загрузить модели', 'error'));
-    throw e;
+    throw fetchCarsError;
   }
 };

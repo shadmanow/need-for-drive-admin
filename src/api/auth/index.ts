@@ -5,7 +5,7 @@ import {
   LoginParams,
   LoginResponse,
   LoginData,
-  LoginUnauthorizedError
+  UnauthorizedError
 } from './types';
 
 export const login = async (params: LoginParams): Promise<LoginData> => {
@@ -25,7 +25,7 @@ export const login = async (params: LoginParams): Promise<LoginData> => {
     };
   } catch (e: any) {
     if (axios.isAxiosError(e) && e.response?.status === 401) {
-      throw new LoginUnauthorizedError();
+      throw new UnauthorizedError();
     }
     throw e;
   }

@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
 
+import { URLS } from '@constants/urls';
 import './footer.scss';
 
 export const Footer: FC = (): JSX.Element => (
   <footer className='footer'>
     <a
       className='footer__link'
-      href='https://shadmanow.github.io/need-for-drive'
+      href={URLS.NEED_FOR_DRIVE}
       rel='noreferrer'
       target='_blank'
     >

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import { getEntries, toDateString, toRubFormat } from '@utils';
 
 import noImage from '@assets/images/no-image.png';
@@ -11,12 +11,12 @@ import Button from '@components/common/button';
 import { SERVICES } from './constants';
 
 export const OrderItem: FC<{ order: Order }> = ({ order }) => {
-  const orderStatus = () => {
+  const orderStatus = useCallback(() => {
     const status = getEntries(OrderStatusIds).find(
       ([, orderStatusId]) => orderStatusId.id === order.orderStatusId?.id
     );
     return <strong>{status ? status[1].name : 'Не указан'}</strong>;
-  };
+  }, [order]);
 
   return (
     <div className='order-item'>
@@ -61,7 +61,7 @@ export const OrderItem: FC<{ order: Order }> = ({ order }) => {
       <div className='order-item__price'>
         <span>{toRubFormat(order.price)}</span>
       </div>
-      <Button value='Изменить' onClick={() => {}} variant='outlined' />
+      <Button value='Изменить' variant='outlined' />
     </div>
   );
 };

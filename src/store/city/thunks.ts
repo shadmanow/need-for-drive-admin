@@ -18,9 +18,9 @@ export const getCities = () => async (dispatch: Dispatch<any>) => {
     const { cities } = await fetchCities();
     dispatch(setCitiesAction(cities));
     dispatch(loadingStop('Загрузка городов...'));
-  } catch (e: any) {
+  } catch (fetchCitiesError) {
     dispatch(loadingStop('Загрузка городов...'));
     dispatch(alertShow('Не удалось загрузить города', 'error'));
-    throw e;
+    throw fetchCitiesError;
   }
 };

@@ -18,9 +18,9 @@ export const getOrders = () => async (dispatch: Dispatch<any>) => {
     const { orders } = await fetchOrders();
     dispatch(setOrdersAction(orders));
     dispatch(loadingStop('Загрузка заказов ...'));
-  } catch (e: any) {
+  } catch (fetchOrdersError) {
     dispatch(loadingStop('Загрузка заказов ...'));
     dispatch(alertShow('Не удалось загрузить заказы', 'error'));
-    throw e;
+    throw fetchOrdersError;
   }
 };

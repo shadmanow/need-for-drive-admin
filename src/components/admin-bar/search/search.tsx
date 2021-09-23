@@ -1,20 +1,16 @@
 import React, { FC, useState } from 'react';
 
-import './search.scss';
-import SearchImage from '@assets/images/svg/search.svg';
+import { ReactComponent as SearchIcon } from '@assets/images/svg/search.svg';
 import TextField from '@components/common/text-field';
 
-export const Search: FC = () => {
-  const [value, setValue] = useState('');
+import './search.scss';
 
+export const Search: FC = () => {
+  const [value, setValue] = useState<string>('');
   return (
     <div className='search'>
-      <SearchImage className='search__image' />
-      <TextField
-        value={value}
-        onChange={(text) => setValue(text)}
-        placeholder='Поиск...'
-      />
+      <SearchIcon className='search__icon' />
+      <TextField value={value} onChange={setValue} placeholder='Поиск...' />
     </div>
   );
 };

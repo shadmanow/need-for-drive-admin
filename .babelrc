@@ -6,7 +6,3 @@
   ],
   "plugins": ["@babel/plugin-transform-runtime"]
 }
-
-// {
-//   "runtime": "automatic"
-// }
