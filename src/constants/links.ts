@@ -1,14 +1,14 @@
-export const links = [
-  {
+export const LINKS = {
+  ORDERS: {
     name: 'Заказы',
-    to: '/admin/order'
+    to: '/admin/orders'
   },
-  {
+  CARS: {
     name: 'Автомобили',
-    to: '/admin/car'
+    to: '/admin/cars'
   },
-  {
+  POINTS: {
     name: 'Пункты выдачи',
-    to: '/admin/point'
+    to: '/admin/points'
   }
-];
+};

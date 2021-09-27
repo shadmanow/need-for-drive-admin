@@ -1,0 +1,47 @@
+@import "@assets/styles/var";
+
+.container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 29px 32px;
+
+  &__title {
+    font-weight: 400;
+    font-size: 29px;
+    line-height: 33px;
+    letter-spacing: -0.725px;
+    color: $text-black-light-color;
+    margin-bottom: 30px;
+  }
+}
+
+.container {
+  @media screen and (max-width: $desktop-size - 1) {
+    padding: 22px 25px;
+
+    &__title {
+      font-size: 27px;
+      margin-bottom: 25px;
+    }
+  }
+
+  @media screen and (max-width: $desktop-min-size - 1) {
+    padding: 22px;
+
+    &__title {
+      font-size: 25px;
+      margin-bottom: 20px;
+    }
+  }
+
+  @media screen and (max-width: $tablet-min-size - 1) {
+    padding: 10px;
+
+    &__title {
+      font-size: 23px;
+      margin-bottom: 15px;
+    }
+  }
+}

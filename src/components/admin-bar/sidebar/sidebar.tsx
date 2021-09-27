@@ -2,11 +2,13 @@ import React, { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 
+import { getEntries } from '@utils';
+
 import menuOpen from '@assets/images/svg/menu-open.svg';
 import menuClose from '@assets/images/svg/menu-close.svg';
 
 import Logo from '@components/logo';
-import { links } from '@constants/links';
+import { LINKS } from '@constants/links';
 
 import './sidebar.scss';
 
@@ -29,7 +31,7 @@ export const Sidebar: FC = () => {
       </div>
       <nav className={classes}>
         <ul>
-          {links.map((link) => (
+          {getEntries(LINKS).map(([, link]) => (
             <li key={link.name}>
               <NavLink
                 className='sidebar__link'

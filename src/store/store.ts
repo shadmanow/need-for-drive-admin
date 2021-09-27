@@ -10,6 +10,7 @@ import { filterReducer } from './filter/reducer';
 import { citiesReducer } from './city/reducer';
 import { carsReducer } from './car/reducer';
 import { errorReducer } from './error/reducer';
+import { categoriesReducer } from './category/reducer';
 
 export const store = createStore(
   combineReducers({
@@ -22,6 +23,7 @@ export const store = createStore(
     filter: filterReducer,
     cities: citiesReducer,
     cars: carsReducer,
+    categories: categoriesReducer,
     error: errorReducer
   }),
   composeWithDevTools(applyMiddleware(thunk))

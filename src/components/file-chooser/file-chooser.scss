@@ -1,0 +1,51 @@
+@import "@assets/styles/var";
+
+.file-chooser {
+  width: 230px;
+  height: 30px;
+  overflow: hidden;
+  background: $background-block-color;
+
+  border: 0.5px solid $border-gray-color;
+  border-radius: 4px;
+
+  display: grid;
+  grid-template-columns: 170px 60px;
+  align-items: center;
+  justify-content: stretch;
+
+  input[type="file"] {
+    display: none;
+  }
+
+  &__text {
+    cursor: pointer;
+    padding-left: 13px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+    letter-spacing: -0.175439px;
+    color: $text-black-color;
+  }
+
+  &__button {
+    cursor: pointer;
+    height: 100%;
+    color: $text-black-color;
+
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+    letter-spacing: -0.175439px;
+
+    background: $background-block-dark-color;
+
+    border: none;
+    border-left: 0.5px solid $border-gray-color;
+    outline: none;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}

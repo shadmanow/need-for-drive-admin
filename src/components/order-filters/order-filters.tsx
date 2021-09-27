@@ -71,6 +71,16 @@ export const OrderFilters: FC = (): JSX.Element => {
     );
   };
 
+  const handleClear = () => {
+    setSelects({
+      car: CARS[0],
+      time: TIMES.ALL,
+      city: CITIES[0],
+      status: STATUSES.ALL
+    });
+    dispatch(setFilter(FILTER_ORDERS, () => true));
+  };
+
   return (
     <div className='order-filters'>
       <Select
@@ -97,6 +107,7 @@ export const OrderFilters: FC = (): JSX.Element => {
         name='status'
         onSelect={handleSelectChange}
       />
+      <Button value='Сбросить' color='danger' onClick={handleClear} />
       <Button value='Применить' onClick={handleConfirm} />
     </div>
   );

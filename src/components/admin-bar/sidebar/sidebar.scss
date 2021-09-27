@@ -47,9 +47,9 @@
   }
 
   &__link_active {
-    color: $success-color;
+    color: $primary-color;
     background: $background-block-active-color;
-    box-shadow: inset 0px -1px 0px $boxshadow-color, inset 4px 0px 0px $success-color;
+    box-shadow: inset 0px -1px 0px $boxshadow-color, inset 4px 0px 0px $primary-color;
   }
 
   &__menu {

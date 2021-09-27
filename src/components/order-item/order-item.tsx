@@ -1,6 +1,7 @@
 import React, { FC, useCallback } from 'react';
 import { getEntries, toDateString, toRubFormat } from '@utils';
 
+import editIcon from '@assets/images/svg/edit.svg';
 import noImage from '@assets/images/no-image.png';
 import { Order } from '@store/order/types';
 import { OrderStatusIds } from '@store/constants';
@@ -61,7 +62,12 @@ export const OrderItem: FC<{ order: Order }> = ({ order }) => {
       <div className='order-item__price'>
         <span>{toRubFormat(order.price)}</span>
       </div>
-      <Button value='Изменить' variant='outlined' />
+      <Button
+        value='Изменить'
+        variant='outlined'
+        color='light'
+        icon={editIcon}
+      />
     </div>
   );
 };

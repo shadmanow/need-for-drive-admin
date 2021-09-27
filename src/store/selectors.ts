@@ -7,4 +7,5 @@ export const selectOrders = (state: AppState) => state.orders;
 export const selectFilter = (state: AppState) => state.filter;
 export const selectCities = (state: AppState) => state.cities;
 export const selectCars = (state: AppState) => state.cars;
+export const selectCategories = (state: AppState) => state.categories;
 export const selectError = (state: AppState) => state.error;

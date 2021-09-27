@@ -1,15 +1,19 @@
 import React, { FC, useState, useEffect } from 'react';
 
-import './order.scss';
+import { Order } from '@store/order/types';
 import { selectOrders, selectFilter } from '@store/selectors';
 import { useAppSelector } from '@store/hooks';
+
 import OrderList from '@components/order-list';
 import OrderFilters, { FILTER_ORDERS } from '@components/order-filters';
+import { Container, Panel } from '@components/wrapper';
 
-export const Order: FC = (): JSX.Element => {
+import './orders.scss';
+
+export const Orders: FC = (): JSX.Element => {
   const { orders } = useAppSelector(selectOrders);
   const { filter } = useAppSelector(selectFilter);
-  const [filteredOrders, setFilteredOrders] = useState<any[]>([]);
+  const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
 
   useEffect(() => {
     if (orders.length) {
@@ -25,12 +29,11 @@ export const Order: FC = (): JSX.Element => {
   }, [filter, orders]);
 
   return (
-    <div className='order'>
-      <h2 className='order__title'>Заказы</h2>
-      <div className='order__wrapper'>
+    <Container title='Заказы' className='order'>
+      <Panel>
         <OrderFilters />
         <OrderList orders={filteredOrders} />
-      </div>
-    </div>
+      </Panel>
+    </Container>
   );
 };

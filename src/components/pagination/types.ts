@@ -1,5 +1,4 @@
 export interface PaginationProps {
-  currentPage: number;
-  countPages: number;
-  onSelect: (page: number) => void;
+  elements: any[];
+  onSelect: (elements: any[]) => void;
 }

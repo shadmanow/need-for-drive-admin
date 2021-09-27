@@ -1,23 +1,36 @@
 import React, { FC, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import { useAppSelector } from '@store/hooks';
-import { selectCars, selectCities, selectOrders } from '@store/selectors';
+import { LINKS } from '@constants/links';
 
-import './admin.scss';
-import Order from '@pages/order';
-import AdminBar from '@components/admin-bar';
-import { useDispatch } from 'react-redux';
 import { getOrders } from '@store/order/thunks';
 import { getCities } from '@store/city/thunks';
 import { getCars } from '@store/car/thunks';
-import { Footer } from '@components/footer/footer';
+import { getCategories } from '@store/category/thunks';
+import { useAppSelector } from '@store/hooks';
+import {
+  selectCars,
+  selectCategories,
+  selectCities,
+  selectOrders
+} from '@store/selectors';
+
+import Orders from '@pages/orders';
+import Cars from '@pages/cars';
+import CarEdit from '@pages/car-edit';
+
+import AdminBar from '@components/admin-bar';
+import Footer from '@components/footer';
 import ErrorBoundary from '@components/error-boundary';
+
+import './admin.scss';
 
 export const Admin: FC = (): JSX.Element => {
   const { orders } = useAppSelector(selectOrders);
   const { cities } = useAppSelector(selectCities);
   const { cars } = useAppSelector(selectCars);
+  const { categories } = useAppSelector(selectCategories);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,6 +43,9 @@ export const Admin: FC = (): JSX.Element => {
     if (!cars.length) {
       dispatch(getCars());
     }
+    if (!categories.length) {
+      dispatch(getCategories());
+    }
   }, []);
 
   return (
@@ -38,8 +54,10 @@ export const Admin: FC = (): JSX.Element => {
       <main className='admin__wrapper'>
         <ErrorBoundary>
           <Switch>
-            <Route path='/admin/order' component={Order} />
-            <Redirect to='/admin/order' />
+            <Route path={LINKS.ORDERS.to} component={Orders} />
+            <Route exact path={LINKS.CARS.to} component={Cars} />
+            <Route path={`${LINKS.CARS.to}/edit/:id`} component={CarEdit} />
+            <Redirect to={LINKS.ORDERS.to} />
           </Switch>
         </ErrorBoundary>
       </main>
