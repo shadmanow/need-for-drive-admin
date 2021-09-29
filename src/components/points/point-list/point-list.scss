@@ -1,0 +1,44 @@
+@import "@assets/styles/var";
+
+.point-list {
+  width: 100%;
+  min-height: 100%;
+  padding: 13px 0;
+
+  display: flex;
+  flex-direction: column;
+
+  &__wrapper {
+    padding: 15px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .table {
+    table-layout: auto;
+
+    &__column:nth-child(1) {
+      width: 30%;
+    }
+
+    &__column:nth-child(2) {
+      width: 70%;
+    }
+  }
+}
+
+.point-list {
+  @media screen and (max-width: $tablet-min-size - 1) {
+    .table {
+      &__column:nth-child(1) {
+        width: 60%;
+      }
+
+      &__column:nth-child(2) {
+        width: 40%;
+      }
+    }
+  }
+}

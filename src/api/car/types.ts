@@ -1,4 +1,4 @@
-import { Car } from '@store/car/types';
+import { Car } from '@store/cars/types';
 
 export interface FetchCarsResponse {
   data: {

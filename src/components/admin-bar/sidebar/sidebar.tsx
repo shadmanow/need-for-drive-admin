@@ -4,8 +4,8 @@ import classNames from 'classnames';
 
 import { getEntries } from '@utils';
 
-import menuOpen from '@assets/images/svg/menu-open.svg';
-import menuClose from '@assets/images/svg/menu-close.svg';
+import openIcon from '@assets/images/svg/menu-open.svg';
+import closeIcon from '@assets/images/svg/menu-close.svg';
 
 import Logo from '@components/logo';
 import { LINKS } from '@constants/links';
@@ -13,26 +13,26 @@ import { LINKS } from '@constants/links';
 import './sidebar.scss';
 
 export const Sidebar: FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpened, setIsOpened] = useState(false);
 
   const classes = classNames('sidebar__nav', {
-    sidebar__nav_closed: !isOpen
+    sidebar__nav_opened: isOpened
   });
 
-  const handleClick = () => setIsOpen(!isOpen);
+  const handleClick = () => setIsOpened(!isOpened);
 
   return (
     <div className='sidebar'>
-      <button onClick={handleClick} className='sidebar__menu' type='button'>
-        <img src={isOpen ? menuClose : menuOpen} alt='menu-open-icon' />
+      <button onClick={handleClick} className='sidebar__button' type='button'>
+        <img src={isOpened ? closeIcon : openIcon} alt='menu-open-icon' />
       </button>
-      <div className='sidebar__header'>
+      <div className='sidebar__logo'>
         <Logo />
       </div>
       <nav className={classes}>
         <ul>
           {getEntries(LINKS).map(([, link]) => (
-            <li key={link.name}>
+            <li key={`nav-${link.name}`}>
               <NavLink
                 className='sidebar__link'
                 to={link.to}

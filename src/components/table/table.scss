@@ -4,7 +4,7 @@
   width: 100%;
   table-layout: fixed;
 
-  &__headers {
+  &__head {
     font-weight: bold;
     font-size: 12px;
     line-height: 14px;
@@ -18,43 +18,43 @@
     color: $text-gray-color;
   }
 
-  &__row {
+  &__tr {
     cursor: pointer;
-    transition: .2s;
+    transition: 0.2s;
 
     &:hover {
       background-color: $background-block-dark-color;
     }
   }
 
-  &__column {
+  &__td {
     text-align: left;
     vertical-align: middle;
     padding: 11px 5px;
   }
 
-  &__column:first-child {
+  &__td:first-child {
     padding-left: 20px;
   }
 
-  &__column:last-child {
+  &__td:last-child {
     padding-right: 20px;
   }
 
-  &__column-header {
+  &__td-head {
     display: none;
   }
 }
 
-.table {
+.table_redrawable {
   @media screen and (max-width: $tablet-min-size - 1) {
     display: block;
 
-    &__headers {
+    .table__head {
       display: none;
     }
 
-    &__body {
+    .table__body {
       display: flex;
       flex-direction: column;
       padding: 13px 15px;
@@ -63,7 +63,7 @@
       }
     }
 
-    &__row {
+    .table__tr {
       border-radius: 4px;
       border: 1px solid $border-gray-color;
       display: flex;
@@ -71,7 +71,7 @@
       font-size: 11px;
     }
 
-    &__column {
+    .table__td {
       border-bottom: 1px solid $border-gray-color;
 
       &,
@@ -98,7 +98,7 @@
       }
     }
 
-    .table__column-header {
+    .table__td-head {
       display: block;
       border-right: 1px solid $border-gray-color;
     }

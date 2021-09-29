@@ -1,4 +1,4 @@
-import { Order } from '@store/order/types';
+import { Order } from '@store/orders/types';
 
 export interface FetchOrdersResponse {
   data: {

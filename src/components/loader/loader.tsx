@@ -1,26 +1,31 @@
 import React, { FC } from 'react';
+import classNames from 'classnames';
 
-import './loader.scss';
-import { useAppSelector } from '@store/hooks';
-import { selectLoading } from '@store/selectors';
 import { ReactComponent as LoadingIcon } from '@assets/images/svg/loading.svg';
 
-export const Loader: FC = (): JSX.Element | null => {
-  const { loading } = useAppSelector(selectLoading);
+import './loader.scss';
+import { LoaderProps } from './types';
 
-  if (!loading.length) {
+export const Loader: FC<LoaderProps> = ({
+  className,
+  isLoading,
+  loadingList,
+  hideText = false
+}): JSX.Element | null => {
+  const classes = classNames('loader', className);
+  if (!isLoading) {
     return null;
   }
-
   return (
-    <div className='loader'>
+    <div className={classes}>
       <LoadingIcon className='loader__icon' />
       <div className='loader__list'>
-        {loading.map((_loading) => (
-          <span key={`${_loading}`}>{_loading}</span>
-        ))}
+        {!hideText &&
+          loadingList?.map((loading) => (
+            <span key={`${loading}`}>{loading}</span>
+          ))}
       </div>
-      <span className='loader__text'>Подождите...</span>
+      {!hideText && <span className='loader__text'>Подождите...</span>}
     </div>
   );
 };

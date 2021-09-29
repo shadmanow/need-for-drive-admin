@@ -1,6 +1,7 @@
 @import "@assets/styles/var";
 
 .panel {
+  padding: 18px;
   display: flex;
   flex-direction: column;
   background: $background-block-color;
@@ -11,28 +12,19 @@
 
   &__title {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 21px;
     color: $text-black-light-color;
-    margin: 18px 0 20px 40px;
+    margin-bottom: 18px;
+  }
+
+  &__body {
+    width: 100%;
+    height: 100%;
   }
 }
 
 .panel {
-  @media screen and (max-width: $desktop-size - 1) {
-    &__title {
-      font-size: 16px;
-      margin-bottom: 25px;
-    }
-  }
-
-  @media screen and (max-width: $desktop-min-size - 1) {
-    &__title {
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
-  }
-
   @media screen and (max-width: $tablet-min-size - 1) {
     &__title {
       font-size: 14px;

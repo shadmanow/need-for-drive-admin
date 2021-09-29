@@ -12,7 +12,7 @@ export const Container: FC<{
   return (
     <div className={classes}>
       {title && <h1 className='container__title'>{title}</h1>}
-      {children}
+      <div className='container__body'>{children}</div>
     </div>
   );
 };

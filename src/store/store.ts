@@ -3,19 +3,21 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 import { authReducer } from './user/reducer';
-import { loadingReducer } from './loading/reducer';
+import { loadingsReducer } from './loadings/reducer';
 import { alertReducer } from './alert/reducer';
-import { ordersReducer } from './order/reducer';
+import { ordersReducer } from './orders/reducer';
 import { filterReducer } from './filter/reducer';
-import { citiesReducer } from './city/reducer';
-import { carsReducer } from './car/reducer';
+import { citiesReducer } from './cities/reducer';
+import { carsReducer } from './cars/reducer';
 import { errorReducer } from './error/reducer';
-import { categoriesReducer } from './category/reducer';
+import { categoriesReducer } from './categories/reducer';
+import { pointsReducer } from './points/reducer';
+import { locationReducer } from './location/reducer';
 
 export const store = createStore(
   combineReducers({
     ui: combineReducers({
-      loading: loadingReducer,
+      loadings: loadingsReducer,
       alert: alertReducer
     }),
     auth: authReducer,
@@ -24,6 +26,8 @@ export const store = createStore(
     cities: citiesReducer,
     cars: carsReducer,
     categories: categoriesReducer,
+    points: pointsReducer,
+    location: locationReducer,
     error: errorReducer
   }),
   composeWithDevTools(applyMiddleware(thunk))

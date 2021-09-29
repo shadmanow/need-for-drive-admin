@@ -4,8 +4,8 @@ import './select.scss';
 import { SelectProps } from './types';
 
 export const Select: FC<SelectProps> = ({
-  defaultValue,
-  values,
+  value,
+  options,
   onSelect,
   name,
   label
@@ -18,9 +18,9 @@ export const Select: FC<SelectProps> = ({
   return (
     <div className='select'>
       {label && <label className='select__label'>{label}</label>}
-      <select value={defaultValue} name={name} onChange={handleChange}>
-        {values.map((value) => (
-          <option key={`${defaultValue}-${value}`}>{value}</option>
+      <select value={value} name={name} onChange={handleChange}>
+        {options.map((option) => (
+          <option key={`select-${option}`}>{option}</option>
         ))}
       </select>
     </div>

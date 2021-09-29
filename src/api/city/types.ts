@@ -1,4 +1,4 @@
-import { City } from '@store/city/types';
+import { City } from '@store/cities/types';
 
 export interface FetchCitiesResponse {
   data: {

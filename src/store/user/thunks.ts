@@ -4,7 +4,7 @@ import { login } from '@api/auth';
 import { LoginParams, UnauthorizedError } from '@api/auth/types';
 
 import { alertShow } from '@store/alert/thunks';
-import { loadingStart, loadingStop } from '@store/loading/thunks';
+import { loadingStart, loadingStop } from '@store/loadings/thunks';
 
 import {
   UserActionTypes,

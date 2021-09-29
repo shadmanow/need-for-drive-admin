@@ -1,0 +1,77 @@
+@import "@assets/styles/var";
+
+.order-item {
+  width: 100%;
+  display: grid;
+  align-items: start;
+  justify-items: start;
+  grid-template-columns: auto 220px minmax(auto, 1fr) minmax(auto, 1fr) minmax(0, 1fr);
+  grid-gap: 0 12px;
+  border-bottom: 0.5px $border-gray-color solid;
+  padding-bottom: 15px;
+
+  &__image {
+    width: 120px;
+    height: 54px;
+    object-fit: contain;
+  }
+
+  &__description {
+    color: $text-gray-color;
+    display: flex;
+    flex-direction: column;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    white-space: nowrap;
+
+    strong {
+      color: $text-black-dark-color;
+    }
+
+    & > * {
+      margin-bottom: 5px;
+    }
+
+    & > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__price {
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  &__button {
+    width: 100px;
+    justify-self: end;
+  }
+}
+
+.order-item {
+  @media screen and (max-width: $desktop-min-size - 1) {
+    grid-gap: 0 5px;
+
+    &__price {
+      font-size: 20px;
+    }
+  }
+
+  @media screen and (max-width: $tablet-min-size - 1) {
+    grid-template-columns: 1fr;
+    grid-gap: 15px 0;
+    justify-items: start;
+    align-items: center;
+
+    &__image {
+      width: 200px;
+      height: 91px;
+    }
+
+    &__button {
+      justify-self: start;
+    }
+  }
+}

@@ -2,12 +2,12 @@
 
 .notification {
   position: relative;
-
   display: flex;
   align-items: center;
   justify-content: center;
 
   &__count {
+    cursor: pointer;
     position: absolute;
     width: 14px;
     height: 14px;
@@ -22,5 +22,12 @@
     position: absolute;
     bottom: calc(50% - 17px);
     right: 17px;
+  }
+
+  &__icon {
+    cursor: pointer;
+    &:hover path {
+      fill: $primary-color;
+    }
   }
 }

@@ -12,7 +12,7 @@ export const Panel: FC<{
   return (
     <div className={classes}>
       {title && <h2 className='panel__title'>{title}</h2>}
-      {children}
+      <div className='panel__body'>{children}</div>
     </div>
   );
 };

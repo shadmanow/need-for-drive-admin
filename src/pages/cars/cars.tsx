@@ -1,19 +1,22 @@
 import React, { FC, useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+
+import { LINKS } from '@constants/links';
 
 import { useAppSelector } from '@store/hooks';
 import { selectCars, selectFilter } from '@store/selectors';
-import { Car } from '@store/car/types';
+import { Car } from '@store/cars/types';
 
 import { Container, Panel } from '@components/wrapper';
-import { CarList } from '@components/car-list/car-list';
-import { CarFilters } from '@components/car-filters/car-filters';
-import { FILTER_CARS } from '@components/car-filters/constants';
+import { CarList, CarFilters, FILTER_CARS } from '@components/cars';
+import Button from '@components/common/button';
 
 import './cars.scss';
 
 export const Cars: FC = (): JSX.Element => {
-  const { cars } = useAppSelector(selectCars);
-  const { filter } = useAppSelector(selectFilter);
+  const history = useHistory();
+  const cars = useAppSelector(selectCars);
+  const filter = useAppSelector(selectFilter);
   const [filteredCars, setFilteredCars] = useState<Car[]>([]);
 
   useEffect(() => {
@@ -29,8 +32,13 @@ export const Cars: FC = (): JSX.Element => {
     }
   }, [filter, cars]);
 
+  const handleClick = () => {
+    history.push(`${LINKS.CARS.to}/new`);
+  };
+
   return (
-    <Container title='Автомобили' className='car'>
+    <Container title='Автомобили' className='cars'>
+      <Button value='Добавить' onClick={handleClick} />
       <Panel>
         <CarFilters />
         <CarList cars={filteredCars} />

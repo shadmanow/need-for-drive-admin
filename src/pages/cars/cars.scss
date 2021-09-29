@@ -1,47 +1,11 @@
 @import "@assets/styles/var";
 
-.car {
-  width: 100%;
-  min-height: 100%;
-  overflow-y: auto;
-  // padding: 29px 32px;
+.cars {
+  .button {
+    margin-bottom: 10px;
+  }
 
-  // &__image {
-  //   width: 100px;
-  //   height: 38px;
-  // }
-
-  // .table-row__items > :last-child {
-  //   grid-column: 7 / -1;
-  // }
+  .panel {
+    padding: 0;
+  }
 }
-
-// .car {
-//   @media screen and (max-width: $desktop-min-size - 1) {
-//     .table-row__items > :last-child {
-//       grid-column: 1 / 1;
-//     }
-
-//     padding: 10px;
-
-//     &__image {
-//       width: 182px;
-//       height: 70px;
-//     }
-
-//     .panel {
-//       .table-row__headers,
-//       .table-row__items {
-//         & > * {
-//           height: 30px;
-//         }
-//         & > :first-child {
-//           height: 100px;
-//         }
-//         & > :last-child {
-//           height: 80px;
-//         }
-//       }
-//     }
-//   }
-// }

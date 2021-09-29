@@ -1,0 +1,42 @@
+@import "@assets/styles/var";
+
+.order-filters {
+  padding: 13px 15px;
+  height: 60px;
+  display: grid;
+  background: $background-block-color;
+  grid-template-columns: repeat(4, 130px) 1fr auto;
+  border-bottom: 1px solid $border-gray-color;
+  align-items: center;
+  grid-gap: 0 10px;
+
+  .select {
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .button {
+    width: 100px;
+    justify-self: end;
+  }
+}
+
+.order-filters {
+  @media screen and (max-width: $desktop-min-size - 1) {
+    grid-template-columns: repeat(4, 120px) 1fr auto;
+    grid-gap: 0 5px;
+    .button {
+      width: 90px;
+    }
+  }
+
+  @media screen and (max-width: $tablet-min-size - 1) {
+    height: auto;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+
+    & > :last-child {
+      justify-self: end;
+    }
+  }
+}
