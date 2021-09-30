@@ -5,7 +5,7 @@
   height: 68px;
 
   display: grid;
-  grid-template-columns: 285px 1fr 68px 218px;
+  grid-template-columns: 220px 1fr 68px 218px;
   align-items: stretch;
   justify-items: stretch;
 
@@ -34,10 +34,6 @@
 }
 
 .admin-bar {
-  @media screen and (max-width: $desktop-size - 1) {
-    grid-template-columns: 210px 1fr 68px 218px;
-  }
-
   @media screen and (max-width: $desktop-min-size - 1) {
     grid-template-columns: 40px 1fr 68px 200px;
     height: 55px;

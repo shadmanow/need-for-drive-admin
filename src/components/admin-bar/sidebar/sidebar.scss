@@ -4,7 +4,7 @@
   position: fixed;
   overflow: hidden;
   z-index: 1;
-  width: 210px;
+  width: 220px;
   height: 100%;
   background: $background-block-color;
   box-shadow: 0px 1px 75px rgba(90, 97, 105, 0.11), 0px 2px 4px rgba(90, 97, 105, 0.12),
@@ -88,10 +88,7 @@
     }
 
     &__logo {
-      box-shadow: none;
-      height: 55px;
-      right: 12px;
-      position: fixed;
+      display: none;
     }
 
     &__nav {
@@ -102,8 +99,23 @@
       background: $background-block-color;
     }
 
-    &__nav_opened {
-      display: block;
+    &.sidebar_opened {
+      .sidebar__nav {
+        display: block;
+      }
+      .sidebar__logo {
+        display: block;
+        .logo {
+          &__icon {
+            margin: 0 0 0 5px;
+          }
+          flex-direction: row-reverse;
+        }
+        box-shadow: none;
+        top: 16px;
+        right: 16px;
+        position: fixed;
+      }
     }
   }
 
