@@ -1,6 +1,8 @@
+import { ReactNode } from 'react';
+
 export interface TableColumn {
   id: any;
-  [key: string]: JSX.Element | string | number;
+  [key: string]: ReactNode;
 }
 
 export interface TableProps {

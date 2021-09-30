@@ -6,9 +6,7 @@ import { selectOrders } from '@store/selectors';
 import { Order } from '@store/orders/types';
 
 import { Container } from '@components/wrapper';
-import OrderSettings from '@components/orders/order-settings';
-
-import './order-action.scss';
+import OrderSettings from '@components/orders/order-form';
 
 export const OrderAction: FC = (): JSX.Element => {
   const { id } = useParams<{ id: string | undefined }>();

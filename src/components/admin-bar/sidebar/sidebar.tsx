@@ -2,13 +2,12 @@ import React, { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 
-import { getEntries } from '@utils';
+import { ROUTES } from '@constants/routes';
 
 import openIcon from '@assets/images/svg/menu-open.svg';
 import closeIcon from '@assets/images/svg/menu-close.svg';
 
 import Logo from '@components/logo';
-import { LINKS } from '@constants/links';
 
 import './sidebar.scss';
 
@@ -18,6 +17,21 @@ export const Sidebar: FC = () => {
   const classes = classNames('sidebar__nav', {
     sidebar__nav_opened: isOpened
   });
+
+  const routes = [
+    {
+      name: 'Заказы',
+      to: ROUTES.ORDERS
+    },
+    {
+      name: 'Автомобили',
+      to: ROUTES.CARS
+    },
+    {
+      name: 'Пункты выдачи',
+      to: ROUTES.POINTS
+    }
+  ];
 
   const handleClick = () => setIsOpened(!isOpened);
 
@@ -31,14 +45,14 @@ export const Sidebar: FC = () => {
       </div>
       <nav className={classes}>
         <ul>
-          {getEntries(LINKS).map(([, link]) => (
-            <li key={`nav-${link.name}`}>
+          {routes.map((route) => (
+            <li key={`nav-${route.name}`}>
               <NavLink
                 className='sidebar__link'
-                to={link.to}
+                to={route.to}
                 activeClassName='sidebar__link_active'
               >
-                {link.name}
+                {route.name}
               </NavLink>
             </li>
           ))}

@@ -2,8 +2,8 @@
 
 .car-list {
   width: 100%;
-  min-height: 100%;
-  padding: 13px 0;
+  // min-height: 100%;
+  padding-top: 13px;
   
   display: flex;
   flex-direction: column;
@@ -33,12 +33,9 @@
     }
   }
 
-  &__wrapper {
-    padding: 15px 0;
+  .paginator {
+    margin: 15px 0 0 0;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 }
 

@@ -1,11 +1,7 @@
 @import "@assets/styles/var";
 
 .points {
-  .button {
-    margin-bottom: 10px;
-  }
-
-  .panel {
+  &__wrapper {
     padding: 0;
   }
 }

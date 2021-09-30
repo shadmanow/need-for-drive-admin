@@ -12,6 +12,7 @@ body {
   width: 100%;
   height: 100%;
   font-family: "Helvetica", sans-serif;
+  font-size: 12px;
 }
 
 *,
@@ -37,12 +38,11 @@ body {
 }
 
 a {
+  font-weight: 400;
+  font-size: inherit;
+  line-height: 12px;
   text-decoration: none;
   color: $primary-color;
-  font-weight: 400;
-  font-size: 11.5px;
-  line-height: 12px;
-  letter-spacing: -0.18421px;
 
   &:hover {
     opacity: 0.8;

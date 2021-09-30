@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 
-import { URLS } from '@constants/urls';
+import { LINKS } from '@constants/links';
 import './footer.scss';
 
 export const Footer: FC = (): JSX.Element => (
   <footer className='footer'>
     <a
       className='footer__link'
-      href={URLS.NEED_FOR_DRIVE}
+      href={LINKS.NEED_FOR_DRIVE}
       rel='noreferrer'
       target='_blank'
     >

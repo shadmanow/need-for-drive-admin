@@ -3,10 +3,11 @@
 .order-filters {
   padding: 13px 15px;
   height: 60px;
-  display: grid;
   background: $background-block-color;
-  grid-template-columns: repeat(4, 130px) 1fr auto;
   border-bottom: 1px solid $border-gray-color;
+
+  display: grid;
+  grid-template-columns: repeat(4, 125px) 1fr auto;
   align-items: center;
   grid-gap: 0 10px;
 
@@ -16,27 +17,21 @@
   }
 
   .button {
-    width: 100px;
+    width: 90px;
     justify-self: end;
   }
 }
 
 .order-filters {
   @media screen and (max-width: $desktop-min-size - 1) {
+    padding: 13px 10px;
     grid-template-columns: repeat(4, 120px) 1fr auto;
     grid-gap: 0 5px;
-    .button {
-      width: 90px;
-    }
   }
 
   @media screen and (max-width: $tablet-min-size - 1) {
     height: auto;
     grid-template-columns: 1fr;
     grid-gap: 10px;
-
-    & > :last-child {
-      justify-self: end;
-    }
   }
 }

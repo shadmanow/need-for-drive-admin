@@ -1,18 +1,26 @@
 import React, { FC, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { RouteComponentProps, useParams } from 'react-router-dom';
 
 import { useAppSelector } from '@store/hooks';
 import { selectCars } from '@store/selectors';
+import { Car } from '@store/cars/types';
 
 import { Container } from '@components/wrapper';
-import { CarCard, CarSettings } from '@components/cars';
+import { CarForm } from '@components/cars';
 
-import './car-action.scss';
-import { Car } from '@store/cars/types';
 import { DEFAULT_CAR } from './constants';
 
-export const CarAction: FC = (): JSX.Element => {
+export const CarAction: FC<RouteComponentProps> = ({
+  location
+}): JSX.Element => {
   const { id } = useParams<{ id: string | undefined }>();
+  const title = useMemo(
+    () =>
+      location.pathname.includes('edit')
+        ? 'Редактирование автомобиля'
+        : 'Добавление автомобиля',
+    [location]
+  );
   const cars = useAppSelector(selectCars);
   const car = useMemo<Car>(
     () =>
@@ -21,9 +29,8 @@ export const CarAction: FC = (): JSX.Element => {
   );
 
   return (
-    <Container title='Карточка автомобиля' className='car-action'>
-      <CarCard car={car} />
-      <CarSettings car={car} />
+    <Container title={title} className='car-action'>
+      <CarForm car={car} />
     </Container>
   );
 };

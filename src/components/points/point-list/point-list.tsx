@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { LINKS } from '@constants/links';
+import { ROUTES } from '@constants/routes';
 import { Point } from '@store/points/types';
 
 import Table from '@components/table';
@@ -10,12 +10,12 @@ import Paginator from '@components/paginator';
 import './point-list.scss';
 
 export const PointList: FC<{ points: Point[] }> = ({ points }) => {
+  const [slicedPoints, setSlicedPoints] = useState<Point[]>([]);
   const history = useHistory();
 
-  const [slicedPoints, setSlicedPoints] = useState<Point[]>([]);
-
-  const handleClick = (rowIndex: number) =>
-    history.push(`${LINKS.POINTS.to}/edit/${points[rowIndex].id}`);
+  const handleClick = (rowIndex: number) => {
+    history.push(`${ROUTES.POINTS}/edit/${points[rowIndex].id}`);
+  };
 
   return (
     <div className='point-list'>
@@ -28,9 +28,7 @@ export const PointList: FC<{ points: Point[] }> = ({ points }) => {
         onClick={handleClick}
       />
       {!!points.length && (
-        <div className='car-list__wrapper'>
-          <Paginator elements={points} onSelect={setSlicedPoints} />
-        </div>
+        <Paginator elements={points} onSelect={setSlicedPoints} slice={10} />
       )}
     </div>
   );

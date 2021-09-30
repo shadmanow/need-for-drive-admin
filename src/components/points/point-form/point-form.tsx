@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { getCityLocation } from '@store/location/thunks';
 import { LOCATION_LOADING_TYPE } from '@store/location/types';
 import { Loading } from '@store/loadings/types';
+import { Point } from '@store/points/types';
 import { useAppSelector } from '@store/hooks';
 import { selectCities, selectLoadings, selectLocation } from '@store/selectors';
 
@@ -14,12 +15,9 @@ import Loader from '@components/loader';
 import Button from '@components/common/button';
 import Map from '@components/map';
 
-import './point-settings.scss';
-import { PointSettingsProps } from './types';
+import './point-form.scss';
 
-export const PointSettings: FC<PointSettingsProps> = ({
-  point
-}): JSX.Element => {
+export const PointForm: FC<{ point: Point }> = ({ point }): JSX.Element => {
   const cities = useAppSelector(selectCities);
   const loadings = useAppSelector(selectLoadings);
   const location = useAppSelector(selectLocation);
@@ -47,40 +45,42 @@ export const PointSettings: FC<PointSettingsProps> = ({
     dispatch(getCityLocation(select.value));
   };
 
-  const handleMapClick = (latlng: [number, number]) => {};
-
   return (
-    <Panel className='point-settings'>
-      <Select
-        label='Город'
-        value={initValues.city}
-        options={[...cities.map(({ name }) => name)]}
-        onSelect={handleSelectCity}
-      />
-      <TextField
-        value={initValues.address}
-        label='Пункт выдачи'
-        onChange={(address) => setInitValues({ ...initValues, address })}
-      />
-
-      <div className='point-settings__map-wrapper'>
+    <div className='point-form'>
+      <Panel
+        className='point-form__map'
+        title='Для выбора пункта кликните по карте'
+      >
+        <Map center={mapCenter} />
         <Loader
           hideText
-          className='point-settings__loader'
           isLoading={
             !!loadings.find(
               (loading: Loading) => loading.type === LOCATION_LOADING_TYPE
             )
           }
         />
-        <Map center={mapCenter} onClick={handleMapClick} />
-      </div>
+      </Panel>
 
-      <div className='point-settings__buttons'>
-        <Button value={point.id ? 'Сохранить' : 'Добавить'} />
-        <Button value='Отменить' color='light' />
-        <Button value='Удалить' color='danger' />
-      </div>
-    </Panel>
+      <Panel className='point-form__settings' title='Настройки пункта'>
+        <Select
+          label='Город'
+          value={initValues.city}
+          options={[...cities.map(({ name }) => name)]}
+          onSelect={handleSelectCity}
+        />
+        <TextField
+          value={initValues.address}
+          label='Пункт выдачи'
+          onChange={(address) => setInitValues({ ...initValues, address })}
+        />
+
+        <div className='point-form__buttons'>
+          <Button value={point.id ? 'Сохранить' : 'Добавить'} />
+          <Button value='Отменить' color='light' />
+          <Button value='Удалить' color='danger' />
+        </div>
+      </Panel>
+    </div>
   );
 };

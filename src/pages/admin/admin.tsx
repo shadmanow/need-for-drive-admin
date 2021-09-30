@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import { LINKS } from '@constants/links';
+import { ROUTES } from '@constants/routes';
 
 import { getOrders } from '@store/orders/thunks';
 import { getCities } from '@store/cities/thunks';
@@ -63,21 +63,18 @@ export const Admin: FC = (): JSX.Element => {
       <main className='admin__wrapper'>
         <ErrorBoundary>
           <Switch>
-            <Route exact path={LINKS.ORDERS.to} component={Orders} />
-            <Route exact path={LINKS.CARS.to} component={Cars} />
-            <Route exact path={LINKS.POINTS.to} component={Points} />
-            <Route path={`${LINKS.CARS.to}/edit/:id`} component={CarAction} />
-            <Route path={`${LINKS.CARS.to}/new`} component={CarAction} />
-            <Route path={`${LINKS.POINTS.to}/new`} component={PointAction} />
-            <Route
-              path={`${LINKS.POINTS.to}/edit/:id`}
-              component={PointAction}
-            />
-            <Route
-              path={`${LINKS.ORDERS.to}/edit/:id`}
-              component={OrderAction}
-            />
-            <Redirect to={LINKS.ORDERS.to} />
+            <Route exact path={ROUTES.ORDERS} component={Orders} />
+            <Route exact path={ROUTES.CARS} component={Cars} />
+            <Route exact path={ROUTES.POINTS} component={Points} />
+
+            <Route path={`${ROUTES.CARS}/edit/:id`} component={CarAction} />
+            <Route path={`${ROUTES.CARS}/new`} component={CarAction} />
+
+            <Route path={`${ROUTES.POINTS}/edit/:id`} component={PointAction} />
+            <Route path={`${ROUTES.POINTS}/new`} component={PointAction} />
+
+            <Route path={`${ROUTES.ORDERS}/edit/:id`} component={OrderAction} />
+            <Redirect to={ROUTES.ORDERS} />
           </Switch>
         </ErrorBoundary>
       </main>

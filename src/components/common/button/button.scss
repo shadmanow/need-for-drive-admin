@@ -66,13 +66,3 @@
     color: $text-black-light-color;
   }
 }
-
-.button {
-  @media screen and (max-width: $desktop-min-size - 1) {
-    font-size: 11.5px;
-  }
-
-  @media screen and (max-width: $tablet-min-size - 1) {
-    font-size: 11px;
-  }
-}

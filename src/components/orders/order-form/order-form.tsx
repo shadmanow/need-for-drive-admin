@@ -13,7 +13,7 @@ import Checkbox from '@components/common/checkbox';
 import Select from '@components/common/select';
 import { CarCard } from '@components/cars';
 
-import './order-settings.scss';
+import './order-form.scss';
 import { SERVICES } from '../order-item/constants';
 
 export const OrderSettings: FC<{ order: Order }> = ({ order }): JSX.Element => {
@@ -35,8 +35,8 @@ export const OrderSettings: FC<{ order: Order }> = ({ order }): JSX.Element => {
   });
 
   return (
-    <div className='order-settings'>
-      <Panel title='Автомобиль' className='order-settings__car'>
+    <div className='order-form'>
+      <Panel title='Автомобиль' className='order-form__car'>
         <Select
           value={initValues.car?.name || 'Не указано'}
           options={[...new Set(cars.map(({ name }) => name))]}
@@ -44,7 +44,7 @@ export const OrderSettings: FC<{ order: Order }> = ({ order }): JSX.Element => {
         {initValues.car && <CarCard car={initValues.car} />}
       </Panel>
 
-      <Panel title='Прочее' className='order-settings__other'>
+      <Panel title='Настройки заказа' className='order-form__settings'>
         <Select
           label='Город'
           value={initValues.city.name}
@@ -56,7 +56,7 @@ export const OrderSettings: FC<{ order: Order }> = ({ order }): JSX.Element => {
           options={[...points.map(({ address }) => address)]}
         />
         <TextField label='Цена' value={order.price} />
-        <div className='order-settings__services'>
+        <div className='order-form__services'>
           {getEntries(SERVICES).map(([key, value]) => (
             <Checkbox
               key={`${order.id}-${value}`}
@@ -65,7 +65,7 @@ export const OrderSettings: FC<{ order: Order }> = ({ order }): JSX.Element => {
             />
           ))}
         </div>
-        <div className='order-settings__buttons'>
+        <div className='order-form__buttons'>
           <Button value='Сохранить' />
           <Button value='Отменить' color='light' />
           <Button value='Удалить' color='danger' />

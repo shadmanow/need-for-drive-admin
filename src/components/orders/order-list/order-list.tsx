@@ -11,13 +11,13 @@ export const OrderList: FC<{ orders: Order[] }> = ({ orders }) => {
   const [slicedOrders, setSlicedOrders] = useState<Order[]>([]);
   return (
     <div className='order-list'>
-      {slicedOrders.map((order) => (
-        <OrderItem key={order.id} order={order} />
-      ))}
+      <div className='order-list__wrapper'>
+        {slicedOrders.map((order) => (
+          <OrderItem key={order.id} order={order} />
+        ))}
+      </div>
       {!!orders.length && (
-        <div className='order-list__paginator-wrapper'>
-          <Paginator elements={orders} onSelect={setSlicedOrders} />
-        </div>
+        <Paginator elements={orders} onSelect={setSlicedOrders} />
       )}
     </div>
   );

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import editIcon from '@assets/images/svg/edit.svg';
 import noImage from '@assets/images/no-image.png';
 
-import { LINKS } from '@constants/links';
+import { ROUTES } from '@constants/routes';
 import { getEntries, toDateString, toRubFormat } from '@utils';
 import { Order } from '@store/orders/types';
 import { OrderStatusIds } from '@store/constants';
@@ -26,17 +26,19 @@ export const OrderItem: FC<{ order: Order }> = ({ order }) => {
   }, [order]);
 
   const handleClick = () => {
-    history.push(`${LINKS.ORDERS.to}/edit/${order.id}`);
+    history.push(`${ROUTES.ORDERS}/edit/${order.id}`);
   };
 
   return (
     <div className='order-item'>
-      <img
-        className='order-item__image'
-        src={order.carId?.thumbnail?.path || noImage}
-        alt={order.carId?.name}
-      />
-      <div className='order-item__description'>
+      <div className='order-item__part'>
+        <img
+          className='order-item__image'
+          src={order.carId?.thumbnail?.path || noImage}
+          alt={order.carId?.name}
+        />
+      </div>
+      <div className='order-item__part'>
         <span>Статус: {orderStatus}</span>
         <span>
           <strong>{order.carId?.name || 'Модель не указана'}</strong>
@@ -57,8 +59,8 @@ export const OrderItem: FC<{ order: Order }> = ({ order }) => {
           </strong>
         </span>
       </div>
-      <div className='order-item__description'>
-        {getEntries<typeof SERVICES>(SERVICES).map(([key, value]) => (
+      <div className='order-item__part'>
+        {getEntries(SERVICES).map(([key, value]) => (
           <Checkbox
             key={`${order.id}-${value}`}
             checked={order[key] as boolean}
@@ -67,17 +69,19 @@ export const OrderItem: FC<{ order: Order }> = ({ order }) => {
           />
         ))}
       </div>
-      <div className='order-item__price'>
+      <div className='order-item__part order-item__price'>
         <span>{toRubFormat(order.price)}</span>
       </div>
-      <Button
-        className='order-item__button'
-        value='Изменить'
-        variant='outlined'
-        color='light'
-        icon={editIcon}
-        onClick={handleClick}
-      />
+      <div className='order-item__part'>
+        <Button
+          className='order-item__button'
+          value='Изменить'
+          variant='outlined'
+          color='light'
+          icon={editIcon}
+          onClick={handleClick}
+        />
+      </div>
     </div>
   );
 };

@@ -1,5 +1,3 @@
-import { DEFAULT_SLICE } from './constants';
-
 const getAllPages = (countPages: number) =>
   Array.from({ length: countPages }, (_, i) => i + 1);
 
@@ -45,5 +43,5 @@ export const getPages = (curPage: number, countPages: number) => {
 export const sliceElements = (elements: any[], page: number, slice: number) =>
   elements.slice(slice * (page - 1), slice * (page - 1) + slice);
 
-export const getCountPages = (elements: any[]) =>
-  Math.ceil(elements.length / DEFAULT_SLICE);
+export const getCountPages = (elements: any[], slice: number) =>
+  Math.ceil(elements.length / slice);

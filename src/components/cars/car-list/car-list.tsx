@@ -1,10 +1,9 @@
 import React, { FC, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { LINKS } from '@constants/links';
-
 import noImage from '@assets/images/no-image.png';
 
+import { ROUTES } from '@constants/routes';
 import { Car } from '@store/cars/types';
 
 import Table from '@components/table';
@@ -13,17 +12,18 @@ import Paginator from '@components/paginator';
 import './car-list.scss';
 
 export const CarList: FC<{ cars: Car[] }> = ({ cars }) => {
+  const [slicedCars, setSlicedCars] = useState<Car[]>([]);
   const history = useHistory();
 
-  const [slicedCars, setSlicedCars] = useState<Car[]>([]);
-
-  const handleClick = (rowIndex: number) =>
-    history.push(`${LINKS.CARS.to}/edit/${cars[rowIndex].id}`);
+  const handleClick = (index: number) => {
+    history.push(`${ROUTES.CARS}/edit/${cars[index].id}`);
+  };
 
   return (
     <div className='car-list'>
       <Table
         redrawable
+        onClick={handleClick}
         elements={slicedCars.map((car) => ({
           id: car.id,
           Изображение: (
@@ -40,13 +40,8 @@ export const CarList: FC<{ cars: Car[] }> = ({ cars }) => {
           Категория: car.categoryId?.name || 'Не указан',
           Цвета: car.colors.map((color) => color).join(', ') || 'Нет цветов'
         }))}
-        onClick={handleClick}
       />
-      {!!cars.length && (
-        <div className='car-list__wrapper'>
-          <Paginator elements={cars} onSelect={setSlicedCars} />
-        </div>
-      )}
+      {!!cars.length && <Paginator elements={cars} onSelect={setSlicedCars} />}
     </div>
   );
 };

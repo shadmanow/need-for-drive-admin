@@ -2,23 +2,27 @@
 
 .order-list {
   background: $background-block-color;
-  padding: 13px 22px;
-  display: flex;
-  flex-direction: column;
-  
-  & > * {
-    margin: 15px 0;
+
+  &__wrapper {
+    padding: 13px 15px;
+    display: flex;
+    flex-direction: column;
+
+    & > * {
+      margin: 15px 0;
+    }
   }
 
-  &__paginator-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .paginator {
+    margin: 15px 0 0 0;
+    width: 100%;
   }
 }
 
 .order-list {
   @media screen and (max-width: $desktop-min-size - 1) {
-    padding: 13px 10px;
+    &__wrapper {
+      padding: 13px 10px;
+    }
   }
 }
