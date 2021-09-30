@@ -68,10 +68,14 @@ export const Admin: FC = (): JSX.Element => {
             <Route exact path={ROUTES.POINTS} component={Points} />
 
             <Route path={`${ROUTES.CARS}/edit/:id`} component={CarAction} />
-            <Route path={`${ROUTES.CARS}/new`} component={CarAction} />
+            <Route exact path={`${ROUTES.CARS}/new`} component={CarAction} />
 
             <Route path={`${ROUTES.POINTS}/edit/:id`} component={PointAction} />
-            <Route path={`${ROUTES.POINTS}/new`} component={PointAction} />
+            <Route
+              exact
+              path={`${ROUTES.POINTS}/new`}
+              component={PointAction}
+            />
 
             <Route path={`${ROUTES.ORDERS}/edit/:id`} component={OrderAction} />
             <Redirect to={ROUTES.ORDERS} />

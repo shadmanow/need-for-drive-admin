@@ -8,6 +8,8 @@ import { Point } from '@store/points/types';
 import { Container } from '@components/wrapper';
 import PointForm from '@components/points/point-form';
 
+import './point-action.scss';
+
 export const PointAction: FC<RouteComponentProps> = ({
   location
 }): JSX.Element => {
@@ -17,7 +19,7 @@ export const PointAction: FC<RouteComponentProps> = ({
     () =>
       location.pathname.includes('edit')
         ? 'Редактирование пункта выдачи'
-        : 'Добавление пункта выдачи',
+        : 'Добавить пункт выдачи',
     [location]
   );
   const point = useMemo<Point>(

@@ -1,12 +1,15 @@
 import React, { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import classNames from 'classnames';
 
-import { logoutUser } from '@store/user/thunks';
-
-import './user-menu.scss';
 import AvatarIcon from '@assets/images/avatar.png';
 import { ReactComponent as DropdownIcon } from '@assets/images/svg/dropdown.svg';
+
+import { logoutUser } from '@store/user/thunks';
+import { ROUTES } from '@constants/routes';
+
+import './user-menu.scss';
 
 export const UserMenu: FC = () => {
   const dispatch = useDispatch();
@@ -28,13 +31,19 @@ export const UserMenu: FC = () => {
       <span className='user-menu__name'>Admin</span>
       <DropdownIcon className='user-menu__dropdown-icon' />
       <div className={classes}>
-        <a
-          href='/admin/login'
-          className='user-menu__dropdown-button'
+        <Link to={`${ROUTES.CARS}/new`} className='user-menu__link'>
+          Добавить автомобиль
+        </Link>
+        <Link to={`${ROUTES.POINTS}/new`} className='user-menu__link'>
+          Добавить пункт
+        </Link>
+        <Link
+          to='/admin/login'
+          className='user-menu__link'
           onClick={handleLogoutClick}
         >
           Выйти
-        </a>
+        </Link>
       </div>
     </div>
   );

@@ -30,6 +30,14 @@ export const Sidebar: FC = () => {
     {
       name: 'Пункты выдачи',
       to: ROUTES.POINTS
+    },
+    {
+      name: 'Добавить автомобиль',
+      to: `${ROUTES.CARS}/new`
+    },
+    {
+      name: 'Добавить пункт',
+      to: `${ROUTES.POINTS}/new`
     }
   ];
 
@@ -49,6 +57,7 @@ export const Sidebar: FC = () => {
             <li key={`nav-${route.name}`}>
               <NavLink
                 className='sidebar__link'
+                exact
                 to={route.to}
                 activeClassName='sidebar__link_active'
               >

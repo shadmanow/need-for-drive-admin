@@ -2,7 +2,7 @@ import baseApi from '../base';
 import { FetchCarsData, FetchCarsResponse } from './types';
 
 export const fetchCars = async (): Promise<FetchCarsData> => {
-  const response: FetchCarsResponse = await baseApi.get('/api/db/car');
+  const response: FetchCarsResponse = await baseApi.get('/api/db/car?limit=10');
   return {
     cars: response.data.data.map((car) => {
       const { thumbnail } = car;

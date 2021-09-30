@@ -4,17 +4,17 @@
   position: fixed;
   overflow: hidden;
   z-index: 1;
-  width: 285px;
+  width: 210px;
   height: 100%;
   background: $background-block-color;
   box-shadow: 0px 1px 75px rgba(90, 97, 105, 0.11), 0px 2px 4px rgba(90, 97, 105, 0.12),
     0px 7.5px 11px rgba(90, 97, 105, 0.1), 0px 3.5px 17.5px rgba(165, 182, 201, 0.1);
 
   &__logo {
+    padding-left: 32px;
     display: flex;
     align-items: center;
     height: 69px;
-    padding-left: 52px;
     background: $background-block-color;
     box-shadow: inset 0px -1px 0px $boxshadow-color;
 
@@ -33,10 +33,9 @@
   }
 
   &__link {
-    padding-left: 52px;
+    padding-left: 32px;
     font-size: 15px;
     line-height: 17px;
-    letter-spacing: -0.234375px;
     color: $text-black-light-color;
     background: $background-block-color;
     box-shadow: inset 0px -1px 0px $boxshadow-color;
@@ -72,18 +71,6 @@
 }
 
 .sidebar {
-  @media screen and (max-width: $desktop-size - 1) {
-    width: 210px;
-
-    &__logo {
-      padding-left: 32px;
-    }
-
-    &__link {
-      padding-left: 32px;
-    }
-  }
-
   @media screen and (max-width: $desktop-min-size - 1) {
     width: 40px;
     height: 55px;
@@ -101,7 +88,10 @@
     }
 
     &__logo {
-      display: none;
+      box-shadow: none;
+      height: 55px;
+      right: 12px;
+      position: fixed;
     }
 
     &__nav {
@@ -114,6 +104,13 @@
 
     &__nav_opened {
       display: block;
+    }
+  }
+
+  @media screen and (max-width: $desktop-min-size - 1) {
+    &__link {
+      font-size: 14px;
+      height: 47px;
     }
   }
 }

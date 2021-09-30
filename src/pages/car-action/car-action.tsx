@@ -18,7 +18,7 @@ export const CarAction: FC<RouteComponentProps> = ({
     () =>
       location.pathname.includes('edit')
         ? 'Редактирование автомобиля'
-        : 'Добавление автомобиля',
+        : 'Добавить автомобиль',
     [location]
   );
   const cars = useAppSelector(selectCars);
