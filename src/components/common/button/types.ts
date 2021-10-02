@@ -1,4 +1,6 @@
 export interface ButtonProps {
-  value: string;
-  onClick: () => void;
+  variant?: 'outlined' | 'default';
+  value?: string;
+  onClick?: () => void;
+  disabled?: boolean;
 }

@@ -18,7 +18,7 @@ export interface LoginData {
   refreshToken: string;
 }
 
-export class LoginUnauthorizedError extends Error {
+export class UnauthorizedError extends Error {
   constructor() {
     super(undefined);
   }

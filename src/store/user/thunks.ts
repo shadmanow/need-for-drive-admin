@@ -1,7 +1,7 @@
 import cookies from 'react-cookies';
 import { Dispatch } from 'redux';
 import { login } from '@api/auth';
-import { LoginParams, LoginUnauthorizedError } from '@api/auth/types';
+import { LoginParams, UnauthorizedError } from '@api/auth/types';
 
 import { alertShow } from '@store/alert/thunks';
 import { loadingStart, loadingStop } from '@store/loading/thunks';
@@ -36,11 +36,11 @@ export const loginUser =
       dispatch(loginSuccessAction(accessToken, refreshToken));
       dispatch(alertShow('Вы успешно вошли', 'success'));
       dispatch(loadingStop());
-    } catch (e) {
+    } catch (authError) {
       dispatch(loadingStop());
       dispatch(loginFailureAction());
-      if (e instanceof LoginUnauthorizedError) {
-        dispatch(alertShow('Неправильное имя пользователя и пароль', 'error'));
+      if (authError instanceof UnauthorizedError) {
+        dispatch(alertShow('Неверная почта или пароль', 'error'));
       } else {
         dispatch(alertShow('Неизвестная ошибка', 'error'));
       }
@@ -50,7 +50,6 @@ export const loginUser =
 export const logoutUser = () => async (dispatch: Dispatch<any>) => {
   cookies.remove('user', { path: '/' });
   dispatch(loginFailureAction());
-  dispatch(alertShow('Вы вышли', 'success'));
 };
 
 export const checkUser = () => async (dispatch: Dispatch<any>) => {
@@ -58,6 +57,5 @@ export const checkUser = () => async (dispatch: Dispatch<any>) => {
   if (user) {
     const { accessToken, refreshToken } = user;
     dispatch(loginSuccessAction(accessToken, refreshToken));
-    dispatch(alertShow('Вы успешно вошли', 'success'));
   }
 };

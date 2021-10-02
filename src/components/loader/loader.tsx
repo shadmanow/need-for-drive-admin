@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import './loader.scss';
 import { useAppSelector } from '@store/hooks';
 import { selectLoading } from '@store/selectors';
-import LoadingImage from '@assets/images/svg/loading.svg';
+import { ReactComponent as LoadingIcon } from '@assets/images/svg/loading.svg';
 
 export const Loader: FC = (): JSX.Element | null => {
   const { loading } = useAppSelector(selectLoading);
@@ -14,7 +14,12 @@ export const Loader: FC = (): JSX.Element | null => {
 
   return (
     <div className='loader'>
-      <LoadingImage className='loader__icon' />
+      <LoadingIcon className='loader__icon' />
+      <div className='loader__list'>
+        {loading.map((_loading) => (
+          <span key={`${_loading}`}>{_loading}</span>
+        ))}
+      </div>
       <span className='loader__text'>Подождите...</span>
     </div>
   );

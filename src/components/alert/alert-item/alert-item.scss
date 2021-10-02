@@ -7,16 +7,16 @@
   overflow: hidden;
 
   font-size: 16px;
-  color: $white-color;
+  color: $text-white-color;
   animation: opacityAnimation .5s;
   transition: all 1s;
 
   &.alert_error {
-    background-color: $red-color;
+    background-color: $danger-color;
   }
 
   &.alert_success {
-    background-color: $blue-color;
+    background-color: $success-color;
   }
 
   &.alert_hide {

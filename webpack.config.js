@@ -25,15 +25,18 @@ module.exports = {
       '@store': path.join(SRC, 'store'),
       '@pages': path.join(SRC, 'pages'),
       '@api': path.join(SRC, 'api'),
-      '@hooks': path.join(SRC, 'hooks')
+      '@hooks': path.join(SRC, 'hooks'),
+      '@constants': path.join(SRC, 'constants'),
+      '@helpers': path.join(SRC, 'helpers'),
+      '@utils': path.join(SRC, 'utils'),
     }
   },
   module: {
     rules: [
       {
-        test: /\.(ts|js)x?$/,
+        test: /\.(ts|tsx)?$/,
         exclude: /node_modules/,
-        use: ['babel-loader', 'eslint-loader']
+        use: ['babel-loader']
       },
       {
         test: /\.(ttf|eot|woff)$/,
@@ -51,13 +54,28 @@ module.exports = {
       },
       {
         test: /\.svg/,
-        use: ['@svgr/webpack'],
+        use: [
+          {
+            loader: '@svgr/webpack',
+            options: {
+              svgoConfig: {
+                plugins: {
+                  removeViewBox: false
+                }
+              }
+            }
+          },
+          {
+            loader: 'file-loader'
+          }
+        ],
+        type: 'javascript/auto',
         issuer: /\.(ts|js)x?$/
       },
       {
         test: /\.scss$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          IS_DEV ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'postcss-loader',

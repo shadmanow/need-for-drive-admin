@@ -1,0 +1,32 @@
+@import "@assets/styles/var";
+
+.pagination {
+  max-width: 250px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 17px;
+  letter-spacing: -0.471429px;
+
+  color: $success-color;
+
+  display: flex;
+  justify-content: space-between;
+
+  span {
+    padding: 2px 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+      opacity: .7;
+    }
+  }
+
+  &__active {
+    border-radius: 50%;
+    background-color: $success-color;
+    color: $text-white-color;
+  }
+}

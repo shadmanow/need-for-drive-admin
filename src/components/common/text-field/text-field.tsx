@@ -28,7 +28,7 @@ export const TextField: FC<TextFieldProps> = ({
 
   return (
     <div className='textfield'>
-      <label className='textfield__label'>{label}</label>
+      {label && <label className='textfield__label'>{label}</label>}
       <input
         autoComplete='off'
         type={type}
