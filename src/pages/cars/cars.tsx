@@ -9,7 +9,7 @@ import { CarList, CarFilters, FILTER_CARS } from '@components/cars';
 
 import './cars.scss';
 
-export const Cars: FC = (): JSX.Element => {
+export const Cars: FC = () => {
   const cars = useAppSelector(selectCars);
   const filter = useAppSelector(selectFilter);
   const [filteredCars, setFilteredCars] = useState<Car[]>([]);

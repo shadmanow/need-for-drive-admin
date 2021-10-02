@@ -3,10 +3,7 @@ import React, { FC, useState, useRef, ChangeEvent } from 'react';
 import './file-chooser.scss';
 import { FileChooserProps } from './types';
 
-export const FileChooser: FC<FileChooserProps> = ({
-  onFileSelect,
-  accept
-}): JSX.Element => {
+export const FileChooser: FC<FileChooserProps> = ({ onFileSelect, accept }) => {
   const [selectedFile, setSelectedFile] = useState('');
   const inputFileRef = useRef<HTMLInputElement>(null);
 

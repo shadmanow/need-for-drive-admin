@@ -3,7 +3,7 @@ import { FetchOrdersResponse, FetchOrdersData } from './types';
 
 export const fetchOrders = async (): Promise<FetchOrdersData> => {
   const response: FetchOrdersResponse = await baseApi.get(
-    '/api/db/order?limit=10'
+    '/api/db/order?limit=15'
   );
   return {
     orders: response.data.data.map((order) => {

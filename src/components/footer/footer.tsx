@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { LINKS } from '@constants/links';
 import './footer.scss';
 
-export const Footer: FC = (): JSX.Element => (
+export const Footer: FC = () => (
   <footer className='footer'>
     <a
       className='footer__link'

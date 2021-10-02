@@ -8,11 +8,7 @@ import { Point } from '@store/points/types';
 import { Container } from '@components/wrapper';
 import PointForm from '@components/points/point-form';
 
-import './point-action.scss';
-
-export const PointAction: FC<RouteComponentProps> = ({
-  location
-}): JSX.Element => {
+export const PointAction: FC<RouteComponentProps> = ({ location }) => {
   const { id } = useParams<{ id: string | undefined }>();
   const points = useAppSelector(selectPoints);
   const title = useMemo(

@@ -31,7 +31,7 @@ import ErrorBoundary from '@components/error-boundary';
 import './admin.scss';
 import OrderAction from '@pages/order-action';
 
-export const Admin: FC = (): JSX.Element => {
+export const Admin: FC = () => {
   const orders = useAppSelector(selectOrders);
   const cities = useAppSelector(selectCities);
   const cars = useAppSelector(selectCars);

@@ -16,7 +16,7 @@ import { CarCard } from '@components/cars';
 import './order-form.scss';
 import { SERVICES } from '../order-item/constants';
 
-export const OrderSettings: FC<{ order: Order }> = ({ order }): JSX.Element => {
+export const OrderSettings: FC<{ order: Order }> = ({ order }) => {
   const cities = useAppSelector(selectCities);
   const points = useAppSelector(selectPoints);
   const cars = useAppSelector(selectCars);
@@ -36,7 +36,7 @@ export const OrderSettings: FC<{ order: Order }> = ({ order }): JSX.Element => {
 
   return (
     <div className='order-form'>
-      <Panel title='Автомобиль' className='order-form__car'>
+      <Panel className='order-form__car'>
         <Select
           value={initValues.car?.name || 'Не указано'}
           options={[...new Set(cars.map(({ name }) => name))]}

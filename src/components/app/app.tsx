@@ -15,7 +15,7 @@ import Alert from '@components/alert';
 
 import './app.scss';
 
-export const App: FC = (): JSX.Element => {
+export const App: FC = () => {
   const { isLoggedIn } = useAppSelector(selectAuth);
   const loadings = useAppSelector(selectLoadings);
   const dispatch = useDispatch();

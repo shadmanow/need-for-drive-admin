@@ -14,7 +14,7 @@ import Checkbox from '@components/common/checkbox';
 import './car-form.scss';
 import { CarCard } from '../car-card/car-card';
 
-export const CarForm: FC<{ car: Car }> = ({ car }): JSX.Element => {
+export const CarForm: FC<{ car: Car }> = ({ car }) => {
   const categories = useAppSelector(selectCategories);
   const [initValues, setInitValues] = useState({
     id: car.id,

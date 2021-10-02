@@ -9,7 +9,7 @@ import { PointList, PointFilters, FILTER_POINTS } from '@components/points';
 
 import './points.scss';
 
-export const Points: FC = (): JSX.Element => {
+export const Points: FC = () => {
   const points = useAppSelector(selectPoints);
   const filter = useAppSelector(selectFilter);
   const [filteredPoints, setFilteredPoints] = useState<Point[]>([]);

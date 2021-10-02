@@ -10,9 +10,7 @@ import { CarForm } from '@components/cars';
 
 import { DEFAULT_CAR } from './constants';
 
-export const CarAction: FC<RouteComponentProps> = ({
-  location
-}): JSX.Element => {
+export const CarAction: FC<RouteComponentProps> = ({ location }) => {
   const { id } = useParams<{ id: string | undefined }>();
   const title = useMemo(
     () =>

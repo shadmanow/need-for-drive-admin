@@ -17,7 +17,7 @@ import Map from '@components/map';
 
 import './point-form.scss';
 
-export const PointForm: FC<{ point: Point }> = ({ point }): JSX.Element => {
+export const PointForm: FC<{ point: Point }> = ({ point }) => {
   const cities = useAppSelector(selectCities);
   const loadings = useAppSelector(selectLoadings);
   const location = useAppSelector(selectLocation);
@@ -48,21 +48,23 @@ export const PointForm: FC<{ point: Point }> = ({ point }): JSX.Element => {
   return (
     <div className='point-form'>
       <Panel
-        className='point-form__map'
         title='Для выбора пункта кликните по карте'
+        className='point-form__map'
       >
-        <Map center={mapCenter} />
-        <Loader
-          hideText
-          isLoading={
-            !!loadings.find(
-              (loading: Loading) => loading.type === LOCATION_LOADING_TYPE
-            )
-          }
-        />
+        <div className='point-form__map-wrapper'>
+          <Map center={mapCenter} />
+          <Loader
+            hideText
+            isLoading={
+              !!loadings.find(
+                (loading: Loading) => loading.type === LOCATION_LOADING_TYPE
+              )
+            }
+          />
+        </div>
       </Panel>
 
-      <Panel className='point-form__settings' title='Настройки пункта'>
+      <Panel title='Настройки пункта' className='point-form__settings'>
         <Select
           label='Город'
           value={initValues.city}
@@ -70,8 +72,8 @@ export const PointForm: FC<{ point: Point }> = ({ point }): JSX.Element => {
           onSelect={handleSelectCity}
         />
         <TextField
-          value={initValues.address}
           label='Пункт выдачи'
+          value={initValues.address}
           onChange={(address) => setInitValues({ ...initValues, address })}
         />
 

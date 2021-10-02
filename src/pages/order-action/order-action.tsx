@@ -8,7 +8,7 @@ import { Order } from '@store/orders/types';
 import { Container } from '@components/wrapper';
 import OrderSettings from '@components/orders/order-form';
 
-export const OrderAction: FC = (): JSX.Element => {
+export const OrderAction: FC = () => {
   const { id } = useParams<{ id: string | undefined }>();
   const orders = useAppSelector(selectOrders);
   const order = useMemo<Order | undefined>(

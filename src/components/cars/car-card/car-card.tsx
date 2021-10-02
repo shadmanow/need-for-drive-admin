@@ -9,7 +9,7 @@ import ProgressBar from '@components/progress-bar';
 import './car-card.scss';
 import { CarProps } from './types';
 
-export const CarCard: FC<CarProps> = ({ car }): JSX.Element => (
+export const CarCard: FC<CarProps> = ({ car }) => (
   <Panel className='car-card'>
     <img
       className='car-card__image'

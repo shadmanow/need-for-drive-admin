@@ -14,6 +14,7 @@
   &__settings {
     width: 100%;
     .panel__body {
+      height: 100%;
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       grid-template-rows: auto auto auto 1fr;

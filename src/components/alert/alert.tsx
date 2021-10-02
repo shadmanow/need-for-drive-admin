@@ -5,7 +5,7 @@ import { useAppSelector } from '@store/hooks';
 import { selectAlert } from '@store/selectors';
 import { AlertItem } from './alert-item/alert-item';
 
-export const Alert: FC = (): JSX.Element | null => {
+export const Alert: FC = () => {
   const { alerts } = useAppSelector(selectAlert);
 
   return (

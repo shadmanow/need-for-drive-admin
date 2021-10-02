@@ -4,7 +4,7 @@ import Dg, { DgMap, DgMouseEvent } from '2gis-maps';
 import './map.scss';
 import { DEFAULT_MAP_CENTER, DEFAULT_MAP_ZOOM, MapProps } from './types';
 
-export const Map: FC<MapProps> = ({ center, onClick }): JSX.Element => {
+export const Map: FC<MapProps> = ({ center, onClick }) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<DgMap | null>(null);
 

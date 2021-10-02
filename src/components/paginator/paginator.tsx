@@ -10,7 +10,7 @@ export const Paginator: FC<PaginationProps> = ({
   elements,
   onSelect,
   slice
-}): JSX.Element => {
+}) => {
   const [pageCount, setPageCount] = useState<number>(DEFAULT_PAGE_COUNT);
   const [page, setPage] = useState<number>(DEFAULT_PAGE);
   const [pages, setPages] = useState<(number | string)[]>([]);

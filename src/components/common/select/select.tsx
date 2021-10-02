@@ -9,7 +9,7 @@ export const Select: FC<SelectProps> = ({
   onSelect,
   name,
   label
-}): JSX.Element => {
+}) => {
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     if (onSelect) {
       onSelect({ name: event.target.name, value: event.target.value });

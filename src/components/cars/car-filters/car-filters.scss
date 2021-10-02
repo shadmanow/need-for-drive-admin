@@ -31,7 +31,7 @@
   @media screen and (max-width: $tablet-min-size - 1) {
     height: auto;
     grid-template-columns: 1fr;
-    grid-gap: 10px;
+    grid-gap: 5px;
     
     .textfield {
       width: 100%;

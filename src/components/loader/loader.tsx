@@ -11,7 +11,7 @@ export const Loader: FC<LoaderProps> = ({
   isLoading,
   loadingList,
   hideText = false
-}): JSX.Element | null => {
+}) => {
   const classes = classNames('loader', className);
   if (!isLoading) {
     return null;

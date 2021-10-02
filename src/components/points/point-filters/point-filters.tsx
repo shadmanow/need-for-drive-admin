@@ -12,7 +12,7 @@ import Button from '@components/common/button';
 import './point-filters.scss';
 import { FILTER_POINTS } from './constants';
 
-export const PointFilters: FC = (): JSX.Element => {
+export const PointFilters: FC = () => {
   const dispatch = useDispatch();
   const cities = useAppSelector(selectCities);
   const cityOptions = useMemo(

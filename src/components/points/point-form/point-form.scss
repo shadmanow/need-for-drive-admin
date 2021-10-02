@@ -2,7 +2,7 @@
 
 .point-form {
   width: 100%;
-  min-height: 100%;
+  height: 390px;
 
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -11,40 +11,46 @@
   grid-gap: 15px;
 
   &__map {
-    .panel__body {
-      position: relative;
-      width: 100%;
-      height: 100%;
-
-      & > * {
-        width: 100%;
-        height: 100%;
-      }
+    .panel__title {
+      font-weight: 400;
+      font-size: 13px;
     }
 
-    .panel__title {
-      font-size: 12px;
-      margin-bottom: 5px;
+    .panel__body {
+      width: 100%;
+      height: 100%;
+      padding-top: 5px;
+    }
+  }
+
+  &__map-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .map {
+      width: 100%;
+      height: 100%;
     }
 
     .loader {
       position: absolute;
       top: 0;
       left: 0;
+
       width: 100%;
       height: 100%;
     }
   }
 
-  &__settings {
-    .panel__body {
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: auto auto 1fr;
-      align-items: stretch;
-      justify-items: stretch;
-      grid-gap: 15px;
-    }
+  &__settings .panel__body {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr;
+    align-items: stretch;
+    justify-items: stretch;
+    grid-gap: 30px;
   }
 
   &__buttons {

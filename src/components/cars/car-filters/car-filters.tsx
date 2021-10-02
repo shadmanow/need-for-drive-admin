@@ -10,7 +10,7 @@ import Button from '@components/common/button';
 import './car-filters.scss';
 import { FILTER_CARS } from './constants';
 
-export const CarFilters: FC = (): JSX.Element => {
+export const CarFilters: FC = () => {
   const dispatch = useDispatch();
   const [carName, setCarName] = useState<string>('');
 

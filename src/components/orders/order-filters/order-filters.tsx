@@ -20,7 +20,7 @@ import {
   timePredicate
 } from './helpers';
 
-export const OrderFilters: FC = (): JSX.Element => {
+export const OrderFilters: FC = () => {
   const dispatch = useDispatch();
   const cities = useAppSelector(selectCities);
   const cars = useAppSelector(selectCars);

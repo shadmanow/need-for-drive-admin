@@ -9,7 +9,7 @@ import { Container, Panel } from '@components/wrapper';
 
 import './orders.scss';
 
-export const Orders: FC = (): JSX.Element => {
+export const Orders: FC = () => {
   const orders = useAppSelector(selectOrders);
   const filter = useAppSelector(selectFilter);
   const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
@@ -29,7 +29,7 @@ export const Orders: FC = (): JSX.Element => {
 
   return (
     <Container title='Заказы' className='orders'>
-      <Panel>
+      <Panel className='points__wrapper'>
         <OrderFilters />
         <OrderList orders={filteredOrders} />
       </Panel>
