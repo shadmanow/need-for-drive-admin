@@ -1,101 +1,115 @@
-const path = require("path");
+const path = require('path');
 
 // variables
-const SRC = path.resolve(__dirname, "./src");
-const DIST = path.resolve(__dirname, "./build");
+const SRC = path.resolve(__dirname, './src');
+const DIST = path.resolve(__dirname, './build');
 const MODE = process.env.MODE.trim();
-const PUBLIC_PATH = MODE === 'production' ? '/need-for-drive-admin/' : '/'
+const IS_DEV = MODE === 'development';
+const PUBLIC_PATH = IS_DEV ? '/' : '/need-for-drive-admin/';
 
-//plugins
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+// plugins
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { HotModuleReplacementPlugin } = require('webpack');
 
 module.exports = {
   context: SRC,
-  entry: "./index.tsx",
+  entry: './index.tsx',
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: ['.tsx', '.ts', '.js'],
     alias: {
-      "@assets": path.resolve(__dirname, "./src/assets"),
-    },
+      '@assets': path.join(SRC, 'assets'),
+      '@components': path.join(SRC, 'components'),
+      '@store': path.join(SRC, 'store'),
+      '@pages': path.join(SRC, 'pages'),
+      '@api': path.join(SRC, 'api'),
+      '@hooks': path.join(SRC, 'hooks')
+    }
   },
   module: {
     rules: [
       {
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
-        use: ["babel-loader", "eslint-loader"]
+        use: ['babel-loader', 'eslint-loader']
       },
       {
-        test: /\.(ttf)$/,
-        type: "asset/resource",
+        test: /\.(ttf|eot|woff)$/,
+        type: 'asset/resource',
         generator: {
-          filename: "assets/fonts/[name][ext]",
-        },
+          filename: 'assets/fonts/[name][ext]'
+        }
       },
       {
         test: /\.(png|jpg)/,
-        type: "asset/resource",
+        type: 'asset/resource',
         generator: {
-          filename: "assets/images/[hash][ext]",
-        },
+          filename: 'assets/images/[hash][ext]'
+        }
       },
       {
         test: /\.svg/,
-        use: ["@svgr/webpack"],
-        issuer: /\.(ts|js)x?$/,
+        use: ['@svgr/webpack'],
+        issuer: /\.(ts|js)x?$/
       },
       {
-        test: /\.s(a|c)ss$/,
+        test: /\.scss$/,
         use: [
-          "style-loader",
-          "css-loader",
+          MiniCssExtractPlugin.loader,
+          'css-loader',
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                plugins: ["autoprefixer"],
-              },
-            },
+                plugins: [['autoprefixer']]
+              }
+            }
           },
-          "sass-loader",
-        ],
+          'sass-loader'
+        ]
       },
       {
         test: /\.css$/,
         use: [
-          "style-loader",
+          MiniCssExtractPlugin.loader,
+          'css-loader',
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                plugins: ["autoprefixer"],
-              },
-            },
-          },
-          "css-loader",
-        ],
-      },
-    ],
+                plugins: [['autoprefixer']]
+              }
+            }
+          }
+        ]
+      }
+    ]
   },
   mode: MODE,
   output: {
     path: DIST,
-    filename: "[contenthash].js",
+    filename: '[contenthash].js'
   },
   plugins: [
     new HtmlWebpackPlugin({
       inject: true,
-      template: "./index.html",
-      publicPath: PUBLIC_PATH,
+      template: './index.html',
+      publicPath: PUBLIC_PATH
     }),
     new CleanWebpackPlugin(),
+    new HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'assets/styles.[hash].css'
+    }),
+    new Dotenv()
   ],
   devServer: {
     contentBase: DIST,
     port: 8080,
+    hot: true,
     historyApiFallback: true,
-    hotOnly: true,
-    open: true,
-  },
+    open: true
+  }
 };

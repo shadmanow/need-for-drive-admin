@@ -1,0 +1,25 @@
+@import "@assets/styles/var";
+
+.button {
+  width: 110px;
+  height: 30px;
+  border: none;
+
+  background: $blue-color;
+  border: 0.5px solid $blue-color;
+  border-radius: 4px;
+
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: -0.0821429px;
+  color: $white-color;
+  cursor: pointer;
+  
+  &:hover {
+    opacity: .9;
+  }
+}
