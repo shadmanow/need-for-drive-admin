@@ -5,7 +5,7 @@ import './logo.scss';
 
 export const Logo: React.FC = () => (
   <div className='logo'>
-    <LogoIcon className='logo__image' />
+    <LogoIcon className='logo__icon' />
     <span className='logo__text'>Need for drive</span>
   </div>
 );

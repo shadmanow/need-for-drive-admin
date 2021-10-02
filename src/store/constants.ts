@@ -1,4 +1,4 @@
-import { OrderStatusId } from './order/types';
+import { OrderStatusId } from './orders/types';
 
 export const OrderStatusIds = {
   NEW: { name: 'Новые', id: '5e26a191099b810b946c5d89' } as OrderStatusId,

@@ -8,7 +8,7 @@ import Logo from '@components/logo';
 import TextField from '@components/common/text-field';
 import Button from '@components/common/button';
 
-export const Login: FC = (): JSX.Element => {
+export const Login: FC = () => {
   const [form, setForm] = useState({ username: '', password: '' });
   const dispatch = useDispatch();
 

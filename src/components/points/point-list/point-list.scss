@@ -1,0 +1,41 @@
+@import "@assets/styles/var";
+
+.point-list {
+  width: 100%;
+  min-height: 100%;
+  padding-top: 13px 0;
+
+  display: flex;
+  flex-direction: column;
+
+  .table {
+    table-layout: auto;
+
+    &__column:nth-child(1) {
+      width: 30%;
+    }
+
+    &__column:nth-child(2) {
+      width: 70%;
+    }
+  }
+
+  .paginator {
+    margin: 15px 0 0 0;
+    width: 100%;
+  }
+}
+
+.point-list {
+  @media screen and (max-width: $tablet-min-size - 1) {
+    .table {
+      &__column:nth-child(1) {
+        width: 60%;
+      }
+
+      &__column:nth-child(2) {
+        width: 40%;
+      }
+    }
+  }
+}

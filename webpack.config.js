@@ -28,7 +28,7 @@ module.exports = {
       '@hooks': path.join(SRC, 'hooks'),
       '@constants': path.join(SRC, 'constants'),
       '@helpers': path.join(SRC, 'helpers'),
-      '@utils': path.join(SRC, 'utils'),
+      '@utils': path.join(SRC, 'utils')
     }
   },
   module: {
@@ -54,23 +54,29 @@ module.exports = {
       },
       {
         test: /\.svg/,
-        use: [
+        oneOf: [
           {
-            loader: '@svgr/webpack',
-            options: {
-              svgoConfig: {
-                plugins: {
-                  removeViewBox: false
+            dependency: { not: ['url'] },
+            use: [
+              {
+                loader: '@svgr/webpack',
+                options: {
+                  svgoConfig: {
+                    plugins: {
+                      removeViewBox: false
+                    }
+                  }
                 }
+              },
+              {
+                loader: 'new-url-loader'
               }
-            }
+            ]
           },
           {
-            loader: 'file-loader'
+            type: 'asset'
           }
-        ],
-        type: 'javascript/auto',
-        issuer: /\.(ts|js)x?$/
+        ]
       },
       {
         test: /\.scss$/,
@@ -124,10 +130,11 @@ module.exports = {
     new Dotenv()
   ],
   devServer: {
+    port: 3000,
     contentBase: DIST,
-    port: 8080,
-    hot: true,
     historyApiFallback: true,
+    hot: true,
+    hotOnly: true,
     open: true
   }
 };

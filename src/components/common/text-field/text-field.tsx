@@ -20,7 +20,9 @@ export const TextField: FC<TextFieldProps> = ({
   });
 
   const handleChange = (e: any) => {
-    onChange(e.target.value);
+    if (onChange) {
+      onChange(e.target.value);
+    }
     if (!firstChanged) {
       setFirstChanged(true);
     }

@@ -1,14 +1,3 @@
-export const links = [
-  {
-    name: 'Заказы',
-    to: '/admin/order'
-  },
-  {
-    name: 'Автомобили',
-    to: '/admin/car'
-  },
-  {
-    name: 'Пункты выдачи',
-    to: '/admin/point'
-  }
-];
+export const LINKS = {
+  NEED_FOR_DRIVE: 'https://shadmanow.github.io/need-for-drive'
+};

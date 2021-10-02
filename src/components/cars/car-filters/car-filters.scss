@@ -1,0 +1,40 @@
+@import "@assets/styles/var";
+
+.car-filters {
+  padding: 13px 15px;
+  height: 60px;
+  background: $background-block-color;
+  border-bottom: 1px solid $border-gray-color;
+
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  justify-items: start;
+  align-items: center;
+  grid-gap: 0 10px;
+
+  .textfield {
+    width: 200px;
+  }
+
+  .button {
+    width: 90px;
+    justify-self: end;
+  }
+}
+
+.car-filters {
+  @media screen and (max-width: $desktop-min-size - 1) {
+    padding: 13px 10px;
+    grid-gap: 0 5px;
+  }
+
+  @media screen and (max-width: $tablet-min-size - 1) {
+    height: auto;
+    grid-template-columns: 1fr;
+    grid-gap: 5px;
+    
+    .textfield {
+      width: 100%;
+    }
+  }
+}

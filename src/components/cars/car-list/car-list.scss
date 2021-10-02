@@ -1,0 +1,55 @@
+@import "@assets/styles/var";
+
+.car-list {
+  width: 100%;
+  // min-height: 100%;
+  padding-top: 13px;
+  
+  display: flex;
+  flex-direction: column;
+
+  &__image {
+    width: 100px;
+    height: 38px;
+  }
+
+  .table {
+    table-layout: auto;
+
+    &__column:nth-child(1n) {
+      width: 10%;
+    }
+
+    &__column:nth-child(2) {
+      width: 15%;
+    }
+
+    &__column:nth-child(4) {
+      width: 15%;
+    }
+
+    &__column:nth-child(7) {
+      width: 30%;
+    }
+  }
+
+  .paginator {
+    margin: 15px 0 0 0;
+    width: 100%;
+  }
+}
+
+.car-list {
+  @media screen and (max-width: $tablet-min-size - 1) {
+    &__image {
+      width: 152px;
+      height: 58px;
+    }
+
+    .table {
+      &__column:nth-child(1n) {
+        width: 100%;
+      }
+    }
+  }
+}

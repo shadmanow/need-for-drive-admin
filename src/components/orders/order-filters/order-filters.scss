@@ -1,0 +1,37 @@
+@import "@assets/styles/var";
+
+.order-filters {
+  padding: 13px 15px;
+  height: 60px;
+  background: $background-block-color;
+  border-bottom: 1px solid $border-gray-color;
+
+  display: grid;
+  grid-template-columns: repeat(4, 145px) 1fr auto;
+  align-items: center;
+  grid-gap: 0 10px;
+
+  .select {
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .button {
+    width: 90px;
+    justify-self: end;
+  }
+}
+
+.order-filters {
+  @media screen and (max-width: $desktop-min-size + 100) {
+    padding: 13px 10px;
+    grid-template-columns: 120px 140px 130px 135px 1fr auto;
+    grid-gap: 0 4px;
+  }
+
+  @media screen and (max-width: $tablet-min-size + 30) {
+    height: auto;
+    grid-template-columns: 1fr;
+    grid-gap: 5px;
+  }
+}

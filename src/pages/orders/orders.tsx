@@ -1,19 +1,38 @@
-import React, { FC } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { FC, useState, useEffect } from 'react';
 
-import { logoutUser } from '@store/user/thunks';
-import Button from '@components/common/button';
+import { Order } from '@store/orders/types';
+import { selectOrders, selectFilter } from '@store/selectors';
+import { useAppSelector } from '@store/hooks';
+
+import { OrderList, OrderFilters, FILTER_ORDERS } from '@components/orders';
+import { Container, Panel } from '@components/wrapper';
 
 import './orders.scss';
 
-export const Orders: FC = (): JSX.Element => {
-  const disptach = useDispatch();
-  const handleClick = () => disptach(logoutUser());
+export const Orders: FC = () => {
+  const orders = useAppSelector(selectOrders);
+  const filter = useAppSelector(selectFilter);
+  const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
+
+  useEffect(() => {
+    if (orders.length) {
+      setFilteredOrders(orders);
+    }
+  }, [orders]);
+
+  useEffect(() => {
+    const { type, predicate } = filter;
+    if (type === FILTER_ORDERS) {
+      setFilteredOrders(orders.filter(predicate));
+    }
+  }, [filter, orders]);
 
   return (
-    <div className='orders'>
-      <h1>Orders Page</h1>
-      <Button value='Выйти' onClick={handleClick} />
-    </div>
+    <Container title='Заказы' className='orders'>
+      <Panel className='points__wrapper'>
+        <OrderFilters />
+        <OrderList orders={filteredOrders} />
+      </Panel>
+    </Container>
   );
 };

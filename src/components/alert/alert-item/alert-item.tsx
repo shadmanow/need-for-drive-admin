@@ -6,7 +6,7 @@ import './alert-item.scss';
 import { Alert } from '@store/alert/types';
 import { alertHide } from '@store/alert/thunks';
 
-export const AlertItem: FC<{ alert: Alert }> = ({ alert }): JSX.Element => {
+export const AlertItem: FC<{ alert: Alert }> = ({ alert }) => {
   const ref = useRef<HTMLInputElement>(null);
   const [willHide, setWillHide] = useState(false);
   const dispatch = useDispatch();

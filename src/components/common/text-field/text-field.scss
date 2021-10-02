@@ -5,14 +5,12 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 340px;
   border-radius: 3px;
 
   &__label {
     font-weight: 400;
     font-size: 10.5px;
     line-height: 12px;
-    letter-spacing: -0.18421px;
     color: $text-black-color;
     margin-bottom: 8px;
   }
@@ -29,13 +27,14 @@
     border: 0.5px solid $border-gray-color;
     box-sizing: border-box;
     border-radius: inherit;
-    transition: .5s border;
+    transition: 0.5s border;
 
     &:focus {
       outline: none;
     }
 
     &::placeholder {
+      color: $text-gray-color;
       font-size: 12px;
     }
   }

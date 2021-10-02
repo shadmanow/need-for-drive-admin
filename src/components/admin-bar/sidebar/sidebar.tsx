@@ -2,41 +2,66 @@ import React, { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 
-import menuOpen from '@assets/images/svg/menu-open.svg';
-import menuClose from '@assets/images/svg/menu-close.svg';
+import { ROUTES } from '@constants/routes';
+
+import openIcon from '@assets/images/svg/menu-open.svg';
+import closeIcon from '@assets/images/svg/menu-close.svg';
 
 import Logo from '@components/logo';
-import { links } from '@constants/links';
 
 import './sidebar.scss';
 
 export const Sidebar: FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpened, setIsOpened] = useState(false);
 
-  const classes = classNames('sidebar__nav', {
-    sidebar__nav_closed: !isOpen
+  const classes = classNames('sidebar', {
+    sidebar_opened: isOpened
   });
 
-  const handleClick = () => setIsOpen(!isOpen);
+  const routes = [
+    {
+      name: 'Заказы',
+      to: ROUTES.ORDERS
+    },
+    {
+      name: 'Автомобили',
+      to: ROUTES.CARS
+    },
+    {
+      name: 'Пункты выдачи',
+      to: ROUTES.POINTS
+    },
+    {
+      name: 'Добавить автомобиль',
+      to: `${ROUTES.CARS}/new`
+    },
+    {
+      name: 'Добавить пункт',
+      to: `${ROUTES.POINTS}/new`
+    }
+  ];
+
+  const handleClick = () => setIsOpened(!isOpened);
 
   return (
-    <div className='sidebar'>
-      <button onClick={handleClick} className='sidebar__menu' type='button'>
-        <img src={isOpen ? menuClose : menuOpen} alt='menu-open-icon' />
+    <div className={classes}>
+      <button onClick={handleClick} className='sidebar__button' type='button'>
+        <img src={isOpened ? closeIcon : openIcon} alt='menu-open-icon' />
       </button>
-      <div className='sidebar__header'>
+      <div className='sidebar__logo'>
         <Logo />
       </div>
-      <nav className={classes}>
+      <nav className='sidebar__nav'>
         <ul>
-          {links.map((link) => (
-            <li key={link.name}>
+          {routes.map((route) => (
+            <li key={`nav-${route.name}`}>
               <NavLink
                 className='sidebar__link'
-                to={link.to}
+                exact
+                to={route.to}
                 activeClassName='sidebar__link_active'
               >
-                {link.name}
+                {route.name}
               </NavLink>
             </li>
           ))}

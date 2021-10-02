@@ -1,26 +1,41 @@
 @import "@assets/styles/var";
 
 .select {
-  padding: 8px 30px 8px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 
-  background: $background-block-color url("@assets/images/svg/select.svg") no-repeat right 11px center;
-  border: 0.5px solid $border-gray-color;
-  border-radius: 4px;
-
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 13px;
-  letter-spacing: -0.345714px;
-  color: $text-gray-color;
-
-  .select option {
-    font-size: 12px;
+  &__label {
+    font-weight: 400;
+    font-size: 10.5px;
+    line-height: 12px;
+    color: $text-black-color;
+    margin-bottom: 8px;
   }
 
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  select {
+    width: 100%;
+    padding: 8px 30px 8px 14px;
 
-  &::-ms-expand {
-    display: none;
+    background: $background-block-color url("@assets/images/svg/select.svg") no-repeat right 11px center;
+    border: 0.5px solid $border-gray-color;
+    border-radius: 4px;
+
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 13px;
+    color: $text-gray-color;
+
+    option {
+      font-size: 12px;
+    }
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    &::-ms-expand {
+      display: none;
+    }
   }
 }

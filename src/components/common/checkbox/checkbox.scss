@@ -2,7 +2,7 @@
 
 .checkbox {
   font-weight: 300;
-  font-size: inherit;
+  font-size: 12px;
   line-height: 16px;
 
   &__input,
@@ -45,7 +45,10 @@
     display: inline-block;
     width: 13px;
     height: 10px;
-    background-image: url("@assets/images/svg/okay.svg");
+    mask: url("@assets/images/svg/okay.svg") 100% 100%;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    background-color: black;
   }
 
   &__label:hover:before {

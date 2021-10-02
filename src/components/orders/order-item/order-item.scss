@@ -1,0 +1,78 @@
+@import "@assets/styles/var";
+
+.order-item {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: auto minmax(220px, 1fr) repeat(3, minmax(auto, 1fr));
+  align-items: start;
+  justify-items: center;
+  grid-gap: 0 12px;
+
+  &__image {
+    width: 120px;
+    height: 54px;
+    object-fit: contain;
+  }
+
+  &__part {
+    color: $text-gray-color;
+    display: flex;
+    flex-direction: column;
+    line-height: 15px;
+    white-space: nowrap;
+
+    strong {
+      color: $text-black-dark-color;
+    }
+
+    & > * {
+      margin-bottom: 3px;
+    }
+
+    & > :last-child {
+      margin-bottom: 0;
+    }
+
+    &:last-child {
+      justify-self: end;
+    }
+  }
+
+  &__price {
+    color: $text-black-dark-color;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  &__button {
+    width: 90px;
+  }
+}
+
+.order-item {
+  @media screen and (max-width: $desktop-min-size - 1) {
+    grid-gap: 0 10px;
+
+    &__price {
+      font-size: 20px;
+    }
+  }
+
+  @media screen and (max-width: $tablet-min-size - 1) {
+    grid-template-columns: 1fr;
+    grid-gap: 15px 0;
+    justify-items: start;
+    align-items: start;
+
+    &__image {
+      width: 200px;
+      height: 91px;
+    }
+
+    &__part:last-child {
+      justify-self: start;
+    }
+  }
+}

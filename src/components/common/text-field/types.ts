@@ -3,7 +3,7 @@ export interface TextFieldProps {
   label?: string;
   placeholder?: string;
   disabled?: boolean;
-  value: string;
+  value: string | number;
   error?: boolean;
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
 }

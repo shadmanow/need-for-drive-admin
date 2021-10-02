@@ -1,0 +1,35 @@
+@import "@assets/styles/var";
+
+.panel {
+
+  display: flex;
+  flex-direction: column;
+  
+  background: $background-block-color;
+  box-shadow: 0px 1px 0px rgba(90, 97, 105, 0.11), 0px 2px 4px rgba(90, 97, 105, 0.12),
+    0px 5px 5px rgba(90, 97, 105, 0.06), 0px 3.5px 35px rgba(90, 97, 105, 0.1);
+  border-radius: 9px;
+  overflow: hidden;
+
+  &__title {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 21px;
+    color: $text-black-light-color;
+    margin-left: 18px;
+    margin-top: 18px;
+  }
+
+  &__body {
+    padding: 18px;
+  }
+}
+
+.panel {
+  @media screen and (max-width: $tablet-min-size - 1) {
+    &__title {
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+  }
+}

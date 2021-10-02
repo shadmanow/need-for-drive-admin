@@ -1,10 +1,3 @@
-// declare module '*.svg' {
-//   import { ReactElement, SVGProps } from 'react';
-
-//   const content: (props: SVGProps<SVGElement>) => ReactElement;
-//   export default content;
-// }
-
 declare module '*.svg' {
   import * as React from 'react';
 
@@ -14,6 +7,44 @@ declare module '*.svg' {
 
   const src: string;
   export default src;
+}
+
+declare module '2gis-maps' {
+  export interface DgMouseEvent {
+    latlng: {
+      lat: number;
+      lng: number;
+    };
+  }
+
+  export interface DgMapOptions {
+    fullscreenControl: boolean;
+    center: [number, number];
+    zoom: number;
+  }
+
+  export interface DgMap {
+    remove: () => void;
+    off: (type?: string) => void;
+    on: (type: string, fn: (event: DgMouseEvent) => void) => void;
+    setView: (center: [number, number], zoom: number) => void;
+  }
+
+  export interface DgMarkerOptions {
+    zIndexOffset: number;
+  }
+
+  export interface DgMarker {
+    addTo: (dgMap: DgMap) => void;
+    removeFrom: (dgMap: DgMap) => void;
+  }
+
+  export function map(element: HTMLElement, options: DgMapOptions): DgMap;
+
+  export function marker(
+    center: [number, number],
+    dgMarkerOptions?: DgMarkerOptions
+  ): DgMarker;
 }
 
 declare module '*.png';

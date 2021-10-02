@@ -12,6 +12,7 @@ body {
   width: 100%;
   height: 100%;
   font-family: "Helvetica", sans-serif;
+  font-size: 12px;
 }
 
 *,
@@ -37,18 +38,17 @@ body {
 }
 
 a {
-  text-decoration: none;
-  color: $success-color;
   font-weight: 400;
-  font-size: 11.5px;
+  font-size: inherit;
   line-height: 12px;
-  letter-spacing: -0.18421px;
+  text-decoration: none;
+  color: $primary-color;
 
   &:hover {
     opacity: 0.8;
   }
   &:active {
-    color: $success-color;
+    color: $primary-color;
   }
 }
 

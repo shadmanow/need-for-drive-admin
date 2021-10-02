@@ -5,15 +5,17 @@ import './Button.scss';
 import { ButtonProps } from './types';
 
 export const Button: FC<ButtonProps & { className?: string }> = ({
+  icon,
   value,
   onClick,
-  variant = 'default',
   className,
-  disabled
+  disabled,
+  variant = 'default',
+  color = 'primary'
 }) => {
   const classes = classNames('button', className, {
-    button_outlined: variant === 'outlined',
-    button_default: variant === 'default'
+    [`button_${color}`]: color,
+    [`button_${variant}`]: variant
   });
   return (
     <button
@@ -22,7 +24,8 @@ export const Button: FC<ButtonProps & { className?: string }> = ({
       onClick={onClick}
       disabled={disabled}
     >
-      {value}
+      {icon && <img src={icon} alt='button-icon' className='button__icon' />}
+      {value && <span>{value}</span>}
     </button>
   );
 };

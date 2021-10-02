@@ -36,6 +36,7 @@
 
   &__dropdown {
     border: 1px solid $border-gray-color;
+    border-top: none;
     background-color: $background-block-color;
     width: 100%;
     max-height: 300px;
@@ -50,7 +51,7 @@
     max-height: 0;
   }
 
-  &__dropdown-button {
+  &__link {
     display: block;
     width: 100%;
     padding: 12px;
@@ -67,7 +68,7 @@
 .user-menu {
   @media screen and (max-width: $tablet-min-size - 1) {
     height: 55px;
-    
+
     &__icon {
       width: 30px;
       height: 30px;
@@ -75,8 +76,8 @@
     &__name {
       font-size: 14px;
     }
-    &__dropdown-button {
-      font-size: 14px;
+    &__link {
+      font-size: 12px;
     }
   }
 }

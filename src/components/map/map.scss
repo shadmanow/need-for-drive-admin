@@ -1,0 +1,11 @@
+@import "@assets/styles/var";
+
+.map {
+  overflow: hidden;
+  border-radius: 4px;
+
+  &__content {
+    width: 100%;
+    height: 100%
+  }
+}
