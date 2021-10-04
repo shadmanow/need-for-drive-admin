@@ -7,10 +7,11 @@ import './search.scss';
 
 export const Search: FC = () => {
   const [value, setValue] = useState<string>('');
+  const handleChange = (change: { value: string }) => setValue(change.value);
   return (
     <div className='search'>
       <SearchIcon className='search__icon' />
-      <TextField value={value} onChange={setValue} placeholder='Поиск...' />
+      <TextField value={value} onChange={handleChange} placeholder='Поиск...' />
     </div>
   );
 };
