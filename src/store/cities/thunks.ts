@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { fetchCities } from '@api/city/index';
+import { getCitiesReq } from '@api/city/index';
 
 import { loadingStart, loadingStop } from '@store/loadings/thunks';
 import { alertShow } from '@store/alert/thunks';
@@ -21,12 +21,12 @@ const setCitiesAction = (cities: City[]): SetCitiesAction => ({
 export const getCities = () => async (dispatch: Dispatch<any>) => {
   dispatch(loadingStart(CITIES_LOADING));
   try {
-    const { cities } = await fetchCities();
+    const { cities } = await getCitiesReq();
     dispatch(setCitiesAction(cities));
     dispatch(loadingStop(CITIES_LOADING));
-  } catch (fetchCitiesError) {
+  } catch (getCitiesError) {
     dispatch(loadingStop(CITIES_LOADING));
     dispatch(alertShow(CITIES_LOADING_FAILED, 'error'));
-    throw fetchCitiesError;
+    throw getCitiesError;
   }
 };

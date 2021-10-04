@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { fetchCars } from '@api/car';
+import { getCarsReq } from '@api/car';
 
 import { loadingStart, loadingStop } from '@store/loadings/thunks';
 import { alertShow } from '@store/alert/thunks';
@@ -13,7 +13,7 @@ import {
   CARS_LOADING_FAILED
 } from './types';
 
-const setCarsAction = (cars: Car[]): SetCarsAction => ({
+export const setCarsAction = (cars: Car[]): SetCarsAction => ({
   type: CarsActionTypes.SET_CARS,
   cars
 });
@@ -21,7 +21,7 @@ const setCarsAction = (cars: Car[]): SetCarsAction => ({
 export const getCars = () => async (dispatch: Dispatch<any>) => {
   dispatch(loadingStart(CARS_LOADING));
   try {
-    const { cars } = await fetchCars();
+    const { cars } = await getCarsReq();
     dispatch(setCarsAction(cars));
     dispatch(loadingStop(CARS_LOADING));
   } catch (fetchCarsError) {

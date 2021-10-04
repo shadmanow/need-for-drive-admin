@@ -1,15 +1,33 @@
-import { LocationStateDefault } from './default';
-import { LocationAction, LocationActionTypes, LocationState } from './types';
+import {
+  LocationAddressStateDefault,
+  LocationCityStateDefault
+} from './default';
+import {
+  LocationAction,
+  LocationActionTypes,
+  LocationAddressState,
+  LocationCityState
+} from './types';
 
-export const locationReducer = (
-  state: LocationState = LocationStateDefault,
+export const locationCityReducer = (
+  state: LocationCityState = LocationCityStateDefault,
   action: LocationAction
-): LocationState => {
+): LocationCityState => {
   switch (action.type) {
     case LocationActionTypes.SET_CITY_LOCATION:
-      return { ...state, city: action.city };
+      return { city: action.city };
+    default:
+      return state;
+  }
+};
+
+export const locationAddressReducer = (
+  state: LocationAddressState = LocationAddressStateDefault,
+  action: LocationAction
+): LocationAddressState => {
+  switch (action.type) {
     case LocationActionTypes.SET_ADDRESS_LOCATION:
-      return { ...state, address: action.street };
+      return { address: action.address };
     default:
       return state;
   }

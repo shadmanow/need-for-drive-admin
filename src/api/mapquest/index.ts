@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FetchLocationData, FetchLocationResponse } from './types';
+import { GetLocationData, GetLocationResponse } from './types';
 
 const mapquestApi = axios.create({
   baseURL: process.env.REACT_APP_MAPQUEST_API_URL,
@@ -8,40 +8,23 @@ const mapquestApi = axios.create({
   }
 });
 
-export const fetchLocationByName = async (
-  locationName: string
-): Promise<FetchLocationData> => {
-  const response: FetchLocationResponse = await mapquestApi.get(`/address`, {
-    params: {
-      ...mapquestApi.defaults.params,
-      location: locationName
+export const getLocationReq = async (
+  loc: string | [number, number]
+): Promise<GetLocationData> => {
+  const response: GetLocationResponse = await mapquestApi.get(
+    typeof loc === 'string' ? `/address` : `/reverse`,
+    {
+      params: {
+        ...mapquestApi.defaults.params,
+        location: typeof loc === 'string' ? loc : loc.join(',')
+      }
     }
-  });
+  );
   const location = response.data.results[0].locations.find(
     ({ adminArea1 }) => adminArea1 === 'RU'
   );
   if (!location) {
-    throw new Error();
-  }
-  return {
-    location
-  };
-};
-
-export const fetchLocationByLatLng = async (
-  latlng: [number, number]
-): Promise<FetchLocationData> => {
-  const response: FetchLocationResponse = await mapquestApi.get(`/reverse`, {
-    params: {
-      ...mapquestApi.defaults.params,
-      location: latlng.join(',')
-    }
-  });
-  const location = response.data.results[0].locations.find(
-    ({ adminArea1 }) => adminArea1 === 'RU'
-  );
-  if (!location) {
-    throw new Error();
+    throw new Error(`Can't find ${loc} address`);
   }
   return {
     location

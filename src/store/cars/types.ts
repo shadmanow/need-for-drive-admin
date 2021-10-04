@@ -1,3 +1,5 @@
+import { Category } from '@store/categories/types';
+
 export const CARS_LOADING = 'Загрузка автомобилей...';
 export const CARS_LOADING_FAILED = 'Не удалось загрузить автомобили';
 
@@ -5,11 +7,7 @@ export interface Car {
   createdAt?: number;
   name: string;
   description?: string;
-  categoryId?: {
-    name: string;
-    description: string;
-    id: string;
-  };
+  categoryId?: Category;
   priceMax?: number;
   thumbnail?: {
     path: string;
@@ -17,6 +15,7 @@ export interface Car {
     originalname: string;
     size: number;
   };
+  imgFile?: File;
   priceMin?: number;
   number?: string;
   tank?: number;

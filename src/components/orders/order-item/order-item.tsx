@@ -48,9 +48,8 @@ export const OrderItem: FC<{ order: Order }> = ({ order }) => {
         </span>
         <span>
           <strong>
-            {order.cityId && order.pointId
-              ? `${order.cityId.name}, в ${order.pointId.address}`
-              : 'Пункт не указан'}
+            {order.cityId?.name || 'Город не указан'}, в{' '}
+            {order.pointId?.address || 'Пункт не указан'}
           </strong>
         </span>
         <span>

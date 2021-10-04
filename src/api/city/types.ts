@@ -1,11 +1,11 @@
 import { City } from '@store/cities/types';
 
-export interface FetchCitiesResponse {
+export interface GetCitiesResponse {
   data: {
     data: City[];
   };
 }
 
-export interface FetchCitiesData {
+export interface GetCitiesData {
   cities: City[];
 }

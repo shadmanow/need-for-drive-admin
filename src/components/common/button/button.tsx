@@ -9,7 +9,7 @@ export const Button: FC<ButtonProps & { className?: string }> = ({
   value,
   onClick,
   className,
-  disabled,
+  disabled = false,
   variant = 'default',
   color = 'primary'
 }) => {

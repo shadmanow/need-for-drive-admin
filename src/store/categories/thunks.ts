@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { fetchCategories } from '@api/category';
+import { getCategoriesReq } from '@api/category';
 
 import { loadingStart, loadingStop } from '@store/loadings/thunks';
 import { alertShow } from '@store/alert/thunks';
@@ -21,12 +21,12 @@ const setCategoriesAction = (categories: Category[]): SetCategoriesAction => ({
 export const getCategories = () => async (dispatch: Dispatch<any>) => {
   dispatch(loadingStart(CATEGORIES_LOADING));
   try {
-    const { categories } = await fetchCategories();
+    const { categories } = await getCategoriesReq();
     dispatch(setCategoriesAction(categories));
     dispatch(loadingStop(CATEGORIES_LOADING));
-  } catch (fetchCategoriesError) {
+  } catch (getCategoriesError) {
     dispatch(loadingStop(CATEGORIES_LOADING));
     dispatch(alertShow(CATEGORIES_LOADING_FAILED, 'error'));
-    throw fetchCategoriesError;
+    throw getCategoriesError;
   }
 };

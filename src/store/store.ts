@@ -12,7 +12,13 @@ import { carsReducer } from './cars/reducer';
 import { errorReducer } from './error/reducer';
 import { categoriesReducer } from './categories/reducer';
 import { pointsReducer } from './points/reducer';
-import { locationReducer } from './location/reducer';
+import {
+  locationCityReducer,
+  locationAddressReducer
+} from './location/reducer';
+import { currentPointReducer } from './current-point/reducer';
+import { currentCarReducer } from './current-car/reducer';
+import { currentOrderReducer } from './current-order/reducer';
 
 export const store = createStore(
   combineReducers({
@@ -21,13 +27,19 @@ export const store = createStore(
       alert: alertReducer
     }),
     auth: authReducer,
-    orders: ordersReducer,
     filter: filterReducer,
     cities: citiesReducer,
+    orders: ordersReducer,
+    currentOrder: currentOrderReducer,
     cars: carsReducer,
+    currentCar: currentCarReducer,
     categories: categoriesReducer,
     points: pointsReducer,
-    location: locationReducer,
+    currentPoint: currentPointReducer,
+    location: combineReducers({
+      city: locationCityReducer,
+      address: locationAddressReducer
+    }),
     error: errorReducer
   }),
   composeWithDevTools(applyMiddleware(thunk))

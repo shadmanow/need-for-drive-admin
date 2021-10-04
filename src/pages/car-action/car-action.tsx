@@ -1,17 +1,26 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { RouteComponentProps, useParams } from 'react-router-dom';
 
 import { useAppSelector } from '@store/hooks';
-import { selectCars } from '@store/selectors';
-import { Car } from '@store/cars/types';
+import {
+  selectCars,
+  selectCategories,
+  selectCurrentCar
+} from '@store/selectors';
+import { setCurrentCar } from '@store/current-car/thunks';
 
 import { Container } from '@components/wrapper';
 import { CarForm } from '@components/cars';
 
-import { DEFAULT_CAR } from './constants';
-
 export const CarAction: FC<RouteComponentProps> = ({ location }) => {
   const { id } = useParams<{ id: string | undefined }>();
+
+  const dispatch = useDispatch();
+  const cars = useAppSelector(selectCars);
+  const categories = useAppSelector(selectCategories);
+  const currentCar = useAppSelector(selectCurrentCar);
+
   const title = useMemo(
     () =>
       location.pathname.includes('edit')
@@ -19,16 +28,29 @@ export const CarAction: FC<RouteComponentProps> = ({ location }) => {
         : 'Добавить автомобиль',
     [location]
   );
-  const cars = useAppSelector(selectCars);
-  const car = useMemo<Car>(
-    () =>
-      cars.find(({ id: carId }) => carId === id) || ({ ...DEFAULT_CAR } as Car),
-    [id, cars]
-  );
+
+  useEffect(() => {
+    let car;
+    if (id) {
+      car = cars.find(({ id: carId }) => carId === id);
+    }
+    if (car) {
+      dispatch(setCurrentCar({ ...car }));
+    } else {
+      dispatch(
+        setCurrentCar({
+          name: '',
+          description: '',
+          colors: [],
+          categoryId: categories[0]
+        })
+      );
+    }
+  }, []);
 
   return (
     <Container title={title} className='car-action'>
-      <CarForm car={car} />
+      {currentCar && <CarForm />}
     </Container>
   );
 };

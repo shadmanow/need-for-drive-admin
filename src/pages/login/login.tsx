@@ -12,6 +12,10 @@ export const Login: FC = () => {
   const [form, setForm] = useState({ username: '', password: '' });
   const dispatch = useDispatch();
 
+  const handleChange = (change: { name: string; value: string }) => {
+    setForm({ ...form, [change.name]: change.value });
+  };
+
   const handleClick = () => {
     if (form.username && form.password) {
       dispatch(loginUser(form));
@@ -26,19 +30,21 @@ export const Login: FC = () => {
         <span className='login__title'>Вход</span>
 
         <TextField
+          name='username'
           label='Почта'
           value={form.username}
           error={!form.username.length}
-          onChange={(username) => setForm({ ...form, username })}
+          onChange={handleChange}
           disabled={false}
         />
 
         <TextField
+          name='password'
           type='password'
           label='Пароль'
           value={form.password}
           error={!form.password.length}
-          onChange={(password) => setForm({ ...form, password })}
+          onChange={handleChange}
         />
 
         <div className='login__footer'>

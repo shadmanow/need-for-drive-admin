@@ -1,3 +1,3 @@
-import { OrderSettings } from './order-form';
+import { OrderForm } from './order-form';
 
-export default OrderSettings;
+export default OrderForm;

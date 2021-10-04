@@ -13,8 +13,8 @@ export const PointList: FC<{ points: Point[] }> = ({ points }) => {
   const [slicedPoints, setSlicedPoints] = useState<Point[]>([]);
   const history = useHistory();
 
-  const handleClick = (rowIndex: number) => {
-    history.push(`${ROUTES.POINTS}/edit/${points[rowIndex].id}`);
+  const handleClick = (point: Point) => {
+    history.push(`${ROUTES.POINTS}/edit/${point.id}`);
   };
 
   return (

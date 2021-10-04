@@ -1,4 +1,4 @@
 export interface FileChooserProps {
-  onFileSelect?: (file: File | File[]) => void;
+  onFileSelect?: (file: File) => void;
   accept?: string;
 }

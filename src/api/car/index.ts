@@ -1,15 +1,42 @@
-import baseApi from '../base';
-import { FetchCarsData, FetchCarsResponse } from './types';
+import { Car } from '@store/cars/types';
 
-export const fetchCars = async (): Promise<FetchCarsData> => {
-  const response: FetchCarsResponse = await baseApi.get('/api/db/car?limit=15');
+import baseApi from '../base';
+import { initFormData, transformThumbnail } from './helpers';
+import {
+  AddCarData,
+  AddCarResponse,
+  ChangeCarData,
+  ChangeCarResponse,
+  GetCarsData,
+  GerCarsResponse
+} from './types';
+
+export const getCarsReq = async (): Promise<GetCarsData> => {
+  const response: GerCarsResponse = await baseApi.get('/api/db/car');
   return {
-    cars: response.data.data.map((car) => {
-      const { thumbnail } = car;
-      if (thumbnail?.path.startsWith('/files')) {
-        thumbnail.path = `${process.env.REACT_APP_API_URL}/${thumbnail.path}`;
-      }
-      return car;
-    })
+    cars: response.data.data.map((car) => transformThumbnail(car))
   };
+};
+
+export const addCarReq = async (car: Car): Promise<AddCarData> => {
+  const formData = initFormData(car);
+  const response: AddCarResponse = await baseApi.post('/api/db/car', formData);
+  return {
+    car: transformThumbnail(response.data.data)
+  };
+};
+
+export const changeCarReq = async (car: Car): Promise<ChangeCarData> => {
+  const formData = initFormData(car);
+  const response: ChangeCarResponse = await baseApi.put(
+    `/api/db/car/${car.id}`,
+    formData
+  );
+  return {
+    car: transformThumbnail(response.data.data)
+  };
+};
+
+export const deleteCarReq = async (car: Car): Promise<void> => {
+  await baseApi.delete(`/api/db/car/${car.id}`);
 };

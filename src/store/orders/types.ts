@@ -1,39 +1,16 @@
+import { Car } from '@store/cars/types';
+import { City } from '@store/cities/types';
+import { Point } from '@store/points/types';
+
 export const ORDERS_LOADING = 'Загрузка заказов...';
 export const ORDERS_LOADING_FAILED = 'Не удалось загрузить заказы';
 
 export interface Order {
   createdAt: number;
-  orderStatusId: {
-    name: string;
-    id: string;
-  };
-  cityId: {
-    name: string;
-    id: string;
-  };
-  pointId: {
-    address: string;
-    name: string;
-    id: string;
-  };
-  carId: {
-    name: string;
-    description: string;
-    categoryId: {
-      name: string;
-      description: string;
-      id: string;
-    };
-    priceMax: number;
-    priceMin: number;
-    thumbnail: {
-      path: string;
-    };
-    number: string;
-    tank: number;
-    colors: string[];
-    id: string;
-  };
+  orderStatusId: OrderStatusId;
+  cityId: City;
+  pointId: Point;
+  carId: Car;
   color: string;
   dateTo: number;
   price: number;

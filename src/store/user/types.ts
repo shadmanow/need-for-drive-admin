@@ -1,3 +1,7 @@
+export const AUTH_LOADING = 'Авторизация...';
+export const AUTH_LOADING_SUCCESS = 'Вы успешно вошли';
+export const AUTH_LOADING_FAILED = 'Неверные почта или пароль';
+
 export interface UserState {
   readonly isLoggedIn: boolean;
   readonly accessToken: string | null;

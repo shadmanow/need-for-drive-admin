@@ -1,12 +1,28 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-import { getCityLocation } from '@store/location/thunks';
+import { ROUTES } from '@constants/routes';
+
+import { getAddressLocation, getCityLocation } from '@store/location/thunks';
 import { LOCATION_LOADING_TYPE } from '@store/location/types';
 import { Loading } from '@store/loadings/types';
-import { Point } from '@store/points/types';
 import { useAppSelector } from '@store/hooks';
-import { selectCities, selectLoadings, selectLocation } from '@store/selectors';
+import { Point } from '@store/points/types';
+import {
+  addPoint,
+  changePoint,
+  clearCurrentPoint,
+  deletePoint,
+  setCurrentPoint
+} from '@store/current-point/thunks';
+import {
+  selectCities,
+  selectLoadings,
+  selectLocation,
+  selectCurrentPoint,
+  selectCurrentPointStatus
+} from '@store/selectors';
 
 import { Panel } from '@components/wrapper';
 import Select from '@components/common/select';
@@ -17,21 +33,53 @@ import Map from '@components/map';
 
 import './point-form.scss';
 
-export const PointForm: FC<{ point: Point }> = ({ point }) => {
+export const PointForm: FC = () => {
+  const history = useHistory();
+
+  const dispatch = useDispatch();
   const cities = useAppSelector(selectCities);
   const loadings = useAppSelector(selectLoadings);
   const location = useAppSelector(selectLocation);
-  const dispatch = useDispatch();
+
+  const currentPoint = useAppSelector(selectCurrentPoint);
+  const currentPointStatus = useAppSelector(selectCurrentPointStatus);
 
   const [mapCenter, setMapCenter] = useState<[number, number]>();
-  const [initValues, setInitValues] = useState({
-    city: point.cityId?.name || cities[0].name,
-    address: point.address || ''
-  });
+  const [mapMarker, setMapMarker] = useState<[number, number]>();
+  const isMapLoading = useMemo(
+    () =>
+      !!loadings.find(
+        (loading: Loading) => loading.type === LOCATION_LOADING_TYPE
+      ),
+    [loadings]
+  );
+
+  const cityOptions = useMemo(
+    () => [...cities.map(({ name }) => name)],
+    [cities]
+  );
 
   useEffect(() => {
-    dispatch(getCityLocation(initValues.city));
+    if (currentPoint) {
+      dispatch(getCityLocation(currentPoint.cityId.name));
+      if (currentPoint.address) {
+        dispatch(
+          getAddressLocation(
+            `${currentPoint.cityId.name}, ${currentPoint.address}`
+          )
+        );
+      }
+    }
+    return () => {
+      dispatch(clearCurrentPoint());
+    };
   }, []);
+
+  useEffect(() => {
+    if (currentPointStatus) {
+      history.push(ROUTES.POINTS);
+    }
+  }, [currentPointStatus]);
 
   useEffect(() => {
     if (location.city) {
@@ -40,9 +88,56 @@ export const PointForm: FC<{ point: Point }> = ({ point }) => {
     }
   }, [location.city]);
 
-  const handleSelectCity = (select: { value: string }) => {
-    setInitValues({ ...initValues, city: select.value });
-    dispatch(getCityLocation(select.value));
+  useEffect(() => {
+    if (location.address) {
+      const { latLng, street } = location.address;
+      setMapMarker([latLng.lat, latLng.lng]);
+      if (street) {
+        dispatch(
+          setCurrentPoint({ ...currentPoint, address: street } as Point)
+        );
+      }
+    }
+  }, [location.address]);
+
+  const handleMapClick = (coords: [number, number]) => {
+    dispatch(getAddressLocation(coords));
+  };
+
+  const handleChange = (change: { name: string; value: string }) => {
+    dispatch(
+      setCurrentPoint({ ...currentPoint, [change.name]: change.value } as Point)
+    );
+  };
+
+  const handleCitySelect = (change: { value: string }) => {
+    const cityId = cities.find(({ name }) => name === change.value);
+    if (cityId) {
+      dispatch(
+        setCurrentPoint({
+          ...currentPoint,
+          address: '',
+          cityId
+        } as Point)
+      );
+      dispatch(getCityLocation(cityId.name));
+    }
+  };
+
+  const handleApply = () => {
+    if (currentPoint?.id) {
+      dispatch(changePoint());
+    } else {
+      dispatch(addPoint());
+    }
+  };
+
+  const handleCancel = () => {
+    history.push(ROUTES.POINTS);
+  };
+
+  const handleDelete = () => {
+    dispatch(deletePoint());
   };
 
   return (
@@ -52,35 +147,45 @@ export const PointForm: FC<{ point: Point }> = ({ point }) => {
         className='point-form__map'
       >
         <div className='point-form__map-wrapper'>
-          <Map center={mapCenter} />
-          <Loader
-            hideText
-            isLoading={
-              !!loadings.find(
-                (loading: Loading) => loading.type === LOCATION_LOADING_TYPE
-              )
-            }
-          />
+          <Map center={mapCenter} marker={mapMarker} onClick={handleMapClick} />
+          <Loader hideText isLoading={isMapLoading} />
         </div>
       </Panel>
 
       <Panel title='Настройки пункта' className='point-form__settings'>
         <Select
           label='Город'
-          value={initValues.city}
-          options={[...cities.map(({ name }) => name)]}
-          onSelect={handleSelectCity}
+          value={currentPoint?.cityId.name || cities[0].name}
+          options={cityOptions}
+          onSelect={handleCitySelect}
         />
         <TextField
-          label='Пункт выдачи'
-          value={initValues.address}
-          onChange={(address) => setInitValues({ ...initValues, address })}
+          name='address'
+          label='Адрес'
+          error={!currentPoint?.address.length}
+          value={currentPoint?.address || ''}
+          onChange={handleChange}
+        />
+        <TextField
+          name='name'
+          label='Имя'
+          error={!currentPoint?.name.length}
+          value={currentPoint?.name || ''}
+          onChange={handleChange}
         />
 
         <div className='point-form__buttons'>
-          <Button value={point.id ? 'Сохранить' : 'Добавить'} />
-          <Button value='Отменить' color='light' />
-          <Button value='Удалить' color='danger' />
+          <Button
+            disabled={
+              !currentPoint?.address.length && !currentPoint?.name.length
+            }
+            value={currentPoint?.id ? 'Сохранить' : 'Добавить'}
+            onClick={handleApply}
+          />
+          <Button value='Отменить' color='light' onClick={handleCancel} />
+          {currentPoint?.id && (
+            <Button value='Удалить' color='danger' onClick={handleDelete} />
+          )}
         </div>
       </Panel>
     </div>

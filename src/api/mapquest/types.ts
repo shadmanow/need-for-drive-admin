@@ -1,6 +1,6 @@
 import { Location } from '@store/location/types';
 
-export interface FetchLocationResponse {
+export interface GetLocationResponse {
   data: {
     results: [
       {
@@ -10,6 +10,6 @@ export interface FetchLocationResponse {
   };
 }
 
-export interface FetchLocationData {
+export interface GetLocationData {
   location: Location;
 }

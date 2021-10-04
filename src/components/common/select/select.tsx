@@ -7,6 +7,7 @@ export const Select: FC<SelectProps> = ({
   value,
   options,
   onSelect,
+  disabled,
   name,
   label
 }) => {
@@ -18,7 +19,12 @@ export const Select: FC<SelectProps> = ({
   return (
     <div className='select'>
       {label && <label className='select__label'>{label}</label>}
-      <select value={value} name={name} onChange={handleChange}>
+      <select
+        value={value}
+        name={name}
+        onChange={handleChange}
+        disabled={disabled}
+      >
         {options.map((option) => (
           <option key={`select-${option}`}>{option}</option>
         ))}
