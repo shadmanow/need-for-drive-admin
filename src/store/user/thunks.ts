@@ -60,6 +60,7 @@ export const logoutUser = () => async (dispatch: Dispatch<any>) => {
 };
 
 export const checkUser = () => async (dispatch: Dispatch<any>) => {
+  dispatch(loadingStart(AUTH_LOADING));
   const user = cookies.load('user');
   if (user) {
     const { accessToken, refreshToken, expiresIn } = user;
@@ -70,4 +71,5 @@ export const checkUser = () => async (dispatch: Dispatch<any>) => {
       cookies.remove('user', { path: '/' });
     }
   }
+  dispatch(loadingStop(AUTH_LOADING));
 };

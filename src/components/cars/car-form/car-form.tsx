@@ -89,10 +89,16 @@ export const CarForm: FC = () => {
   };
 
   const handleAddColorClick = () => {
-    const newColors = [color, ...colors];
-    setColors(newColors);
-    setColor('');
-    dispatch(setCurrentCar({ ...currentCar, colors: newColors } as Car));
+    if (!color.length) return;
+    const sameColor = colors.find(
+      (_color) => _color.toLocaleLowerCase() === color.toLocaleLowerCase()
+    );
+    if (!sameColor) {
+      const newColors = [color, ...colors];
+      setColors(newColors);
+      setColor('');
+      dispatch(setCurrentCar({ ...currentCar, colors: newColors } as Car));
+    }
   };
 
   const handleDeleteColorClick = (index: number) => {

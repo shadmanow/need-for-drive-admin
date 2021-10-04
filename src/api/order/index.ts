@@ -9,9 +9,7 @@ import {
 } from './types';
 
 export const getOrdersReq = async (): Promise<GetOrdersData> => {
-  const response: GerOrdersResponse = await baseApi.get(
-    '/api/db/order?limit=15'
-  );
+  const response: GerOrdersResponse = await baseApi.get('/api/db/order');
   return {
     orders: response.data.data.map((order) => {
       if (order.carId) {
