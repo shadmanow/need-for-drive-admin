@@ -21,7 +21,8 @@ export const login = async (params: LoginParams): Promise<LoginData> => {
     });
     return {
       accessToken: response.data.access_token,
-      refreshToken: response.data.refresh_token
+      refreshToken: response.data.refresh_token,
+      expiresIn: response.data.expires_in
     };
   } catch (e: any) {
     if (axios.isAxiosError(e) && e.response?.status === 401) {
@@ -45,6 +46,7 @@ export const refreshToken = async (rToken: string): Promise<LoginData> => {
   });
   return {
     accessToken: response.data.access_token,
-    refreshToken: response.data.refresh_token
+    refreshToken: response.data.refresh_token,
+    expiresIn: response.data.expires_in
   };
 };

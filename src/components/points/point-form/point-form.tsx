@@ -177,7 +177,7 @@ export const PointForm: FC = () => {
         <div className='point-form__buttons'>
           <Button
             disabled={
-              !currentPoint?.address.length && !currentPoint?.name.length
+              !currentPoint?.address.length || !currentPoint?.name.length
             }
             value={currentPoint?.id ? 'Сохранить' : 'Добавить'}
             onClick={handleApply}

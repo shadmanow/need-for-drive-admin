@@ -32,9 +32,13 @@ export const loginUser =
   (data: LoginParams) => async (dispatch: Dispatch<any>) => {
     dispatch(loadingStart(AUTH_LOADING));
     try {
-      const { accessToken, refreshToken } = await login(data);
+      const { accessToken, refreshToken, expiresIn } = await login(data);
 
-      cookies.save('user', { accessToken, refreshToken }, { path: '/' });
+      cookies.save(
+        'user',
+        { accessToken, refreshToken, expiresIn: Date.now() + expiresIn * 1000 },
+        { path: '/', maxAge: 9999999 }
+      );
 
       dispatch(loginSuccessAction(accessToken, refreshToken));
       dispatch(alertShow(AUTH_LOADING_SUCCESS, 'success'));
@@ -58,7 +62,12 @@ export const logoutUser = () => async (dispatch: Dispatch<any>) => {
 export const checkUser = () => async (dispatch: Dispatch<any>) => {
   const user = cookies.load('user');
   if (user) {
-    const { accessToken, refreshToken } = user;
-    dispatch(loginSuccessAction(accessToken, refreshToken));
+    const { accessToken, refreshToken, expiresIn } = user;
+    if (expiresIn > Date.now()) {
+      dispatch(loginSuccessAction(accessToken, refreshToken));
+    } else {
+      dispatch(alertShow('Сессия истекла. Пожалуйста перезайдите', 'error'));
+      cookies.remove('user', { path: '/' });
+    }
   }
 };
