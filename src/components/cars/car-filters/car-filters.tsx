@@ -14,6 +14,10 @@ export const CarFilters: FC = () => {
   const dispatch = useDispatch();
   const [carName, setCarName] = useState<string>('');
 
+  const handleCarNameChange = (change: { value: string }) => {
+    setCarName(change.value);
+  };
+
   const handleConfirm = () => {
     dispatch(setFilter(FILTER_CARS, (car: Car) => car.name.includes(carName)));
   };
@@ -28,7 +32,7 @@ export const CarFilters: FC = () => {
       <TextField
         value={carName}
         placeholder='Введите модель...'
-        onChange={setCarName}
+        onChange={handleCarNameChange}
       />
       <Button value='Сбросить' color='danger' onClick={handleClear} />
       <Button value='Применить' onClick={handleConfirm} />

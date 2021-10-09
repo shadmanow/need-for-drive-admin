@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { fetchPoints } from '@api/point';
+import { getPointsReq } from '@api/point';
 
 import { loadingStart, loadingStop } from '@store/loadings/thunks';
 import { alertShow } from '@store/alert/thunks';
@@ -13,7 +13,7 @@ import {
   SetPointsAction
 } from './types';
 
-const setPointsAction = (points: Point[]): SetPointsAction => ({
+export const setPointsAction = (points: Point[]): SetPointsAction => ({
   type: PointsActionTypes.SET_POINTS,
   points
 });
@@ -21,12 +21,12 @@ const setPointsAction = (points: Point[]): SetPointsAction => ({
 export const getPoints = () => async (dispatch: Dispatch<any>) => {
   dispatch(loadingStart(POINTS_LOADING));
   try {
-    const { points } = await fetchPoints();
+    const { points } = await getPointsReq();
     dispatch(setPointsAction(points));
     dispatch(loadingStop(POINTS_LOADING));
-  } catch (fetchPointsError) {
+  } catch (getPointsError) {
     dispatch(loadingStop(POINTS_LOADING));
     dispatch(alertShow(POINTS_LOADING_FAILED, 'error'));
-    throw fetchPointsError;
+    throw getPointsError;
   }
 };

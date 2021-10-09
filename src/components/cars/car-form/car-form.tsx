@@ -1,8 +1,24 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect, useMemo } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import plusIcon from '@assets/images/plus.png';
+
+import { ROUTES } from '@constants/routes';
+
 import { useAppSelector } from '@store/hooks';
-import { selectCategories } from '@store/selectors';
+import {
+  selectCategories,
+  selectCurrentCar,
+  selectCurrentCarStatus
+} from '@store/selectors';
+import {
+  addCar,
+  changeCar,
+  clearCurrentCar,
+  deleteCar,
+  setCurrentCar
+} from '@store/current-car/thunks';
 import { Car } from '@store/cars/types';
 
 import { Panel } from '@components/wrapper';
@@ -14,49 +30,181 @@ import Checkbox from '@components/common/checkbox';
 import './car-form.scss';
 import { CarCard } from '../car-card/car-card';
 
-export const CarForm: FC<{ car: Car }> = ({ car }) => {
+export const CarForm: FC = () => {
+  const history = useHistory();
+
+  const dispatch = useDispatch();
   const categories = useAppSelector(selectCategories);
-  const [initValues, setInitValues] = useState({
-    id: car.id,
-    name: car.name || 'Не указан',
-    category: car.categoryId?.name || 'Не указан',
-    tank: car.tank || 'Не указан',
-    number: car.number || 'Не указан',
-    colors: [...car.colors]
-  });
+  const currentCar = useAppSelector(selectCurrentCar);
+  const currentCarStatus = useAppSelector(selectCurrentCarStatus);
+
+  const [color, setColor] = useState('');
+  const [colors, setColors] = useState(currentCar?.colors || []);
+
+  const categoryOptions = useMemo(
+    () => categories.map((category) => category.name),
+    [categories]
+  );
+
+  const isButtonApplyDisabled = useMemo(
+    () =>
+      !(currentCar?.imgFile || currentCar?.thumbnail) ||
+      !currentCar?.priceMax ||
+      !currentCar?.priceMin ||
+      !currentCar.name ||
+      !currentCar.tank ||
+      !currentCar.number ||
+      !currentCar.description,
+    [currentCar]
+  );
+
+  useEffect(() => {
+    if (currentCarStatus) {
+      history.push(ROUTES.CARS);
+    }
+  }, [currentCarStatus]);
+
+  useEffect(
+    () => () => {
+      dispatch(clearCurrentCar());
+    },
+    []
+  );
+
+  const handleChange = (change: { name: string; value: string }) => {
+    dispatch(
+      setCurrentCar({ ...currentCar, [change.name]: change.value } as Car)
+    );
+  };
+
+  const handleCategorySelect = (select: { value: string }) => {
+    const categoryId = categories.find(({ name }) => name === select.value);
+    if (categoryId) {
+      dispatch(setCurrentCar({ ...currentCar, categoryId } as Car));
+    }
+  };
+
+  const handleColorChange = (change: { value: string }) => {
+    setColor(change.value);
+  };
+
+  const handleAddColorClick = () => {
+    if (!color.length) return;
+    const sameColor = colors.find(
+      (_color) => _color.toLocaleLowerCase() === color.toLocaleLowerCase()
+    );
+    if (!sameColor) {
+      const newColors = [color, ...colors];
+      setColors(newColors);
+      setColor('');
+      dispatch(setCurrentCar({ ...currentCar, colors: newColors } as Car));
+    }
+  };
+
+  const handleDeleteColorClick = (index: number) => {
+    const newColors = [...colors.slice(0, index), ...colors.slice(index + 1)];
+    setColors(newColors);
+    dispatch(setCurrentCar({ ...currentCar, colors: newColors } as Car));
+  };
+
+  const handleApply = () => {
+    if (currentCar?.id) {
+      dispatch(changeCar());
+    } else {
+      dispatch(addCar());
+    }
+  };
+
+  const handleCancel = () => history.push(ROUTES.CARS);
+
+  const handleDelete = () => {
+    dispatch(deleteCar());
+  };
 
   return (
     <div className='car-form'>
-      <CarCard car={car} />
+      <CarCard />
       <Panel title='Настройки автомобиля' className='car-form__settings'>
-        <TextField value={initValues.name} label='Модель автомобиля' />
+        <TextField
+          name='name'
+          label='Модель автомобиля'
+          value={currentCar?.name || ''}
+          error={!currentCar?.name.length}
+          onChange={handleChange}
+        />
         <Select
           label='Категория'
-          value={initValues.category}
-          options={categories.map((category) => category.name)}
+          value={currentCar?.categoryId?.name || categories[0].name}
+          options={categoryOptions}
+          onSelect={handleCategorySelect}
         />
-        <TextField value={initValues.tank} label='Топливо' />
-        <TextField value={initValues.number} label='Номер' />
+        <TextField
+          name='tank'
+          label='Топливо'
+          value={currentCar?.tank || ''}
+          error={!currentCar?.tank || currentCar.tank > 100}
+          onChange={handleChange}
+        />
+        <TextField
+          name='number'
+          label='Номер'
+          value={currentCar?.number || ''}
+          error={!currentCar?.number}
+          onChange={handleChange}
+        />
 
         <div className='car-form__color'>
-          <TextField value='' label='Доступные цвета' />
-          <Button icon={plusIcon} color='light' variant='outlined' />
+          <TextField
+            value={color}
+            label='Доступные цвета'
+            onChange={handleColorChange}
+          />
+          <Button
+            icon={plusIcon}
+            color='light'
+            variant='outlined'
+            onClick={handleAddColorClick}
+          />
 
           <div className='car-form__color-list'>
-            {initValues.colors.map((color) => (
+            {colors.map((value, index) => (
               <Checkbox
-                key={`${initValues.id}-${color}`}
+                key={`${currentCar?.name}-${value}`}
                 checked
-                label={color}
+                label={value}
+                onClick={() => handleDeleteColorClick(index)}
               />
             ))}
           </div>
         </div>
 
+        <div className='car-form__price'>
+          <TextField
+            name='priceMin'
+            label='Начальная цена'
+            error={!currentCar?.priceMin}
+            value={currentCar?.priceMin || ''}
+            onChange={handleChange}
+          />
+          <TextField
+            name='priceMax'
+            label='Максимальная цена'
+            error={!currentCar?.priceMax}
+            value={currentCar?.priceMax || ''}
+            onChange={handleChange}
+          />
+        </div>
+
         <div className='car-form__buttons'>
-          <Button value={car.id ? 'Сохранить' : 'Добавить'} />
-          <Button value='Отменить' color='light' />
-          <Button value='Удалить' color='danger' />
+          <Button
+            disabled={isButtonApplyDisabled}
+            value={currentCar?.id ? 'Сохранить' : 'Добавить'}
+            onClick={handleApply}
+          />
+          <Button value='Отменить' color='light' onClick={handleCancel} />
+          {currentCar?.id && (
+            <Button value='Удалить' color='danger' onClick={handleDelete} />
+          )}
         </div>
       </Panel>
     </div>

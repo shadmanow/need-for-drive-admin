@@ -1,11 +1,11 @@
 import { Category } from '@store/categories/types';
 
-export interface FetchCategoriesResponse {
+export interface GetCategoriesResponse {
   data: {
     data: Category[];
   };
 }
 
-export interface FetchCategoriesData {
+export interface GetCategoriesData {
   categories: Category[];
 }

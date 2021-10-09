@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { fetchLocationByLatLng, fetchLocationByName } from '@api/mapquest';
+import { getLocationReq } from '@api/mapquest';
 
 import { loadingStart, loadingStop } from '@store/loadings/thunks';
 import { alertShow } from '@store/alert/thunks';
@@ -28,15 +28,29 @@ const setAddressLocationAction = (
 });
 
 export const getCityLocation =
-  (locationName: string) => async (dispatch: Dispatch<any>) => {
+  (city: string | [number, number]) => async (dispatch: Dispatch<any>) => {
     dispatch(loadingStart(LOCATION_LOADING, LOCATION_LOADING_TYPE));
     try {
-      const { location } = await fetchLocationByName(locationName);
+      const { location } = await getLocationReq(city);
       dispatch(setCityLocationAction(location));
       dispatch(loadingStop(LOCATION_LOADING, LOCATION_LOADING_TYPE));
-    } catch (fetchCityLocationError) {
+    } catch (getCityLocationError) {
       dispatch(loadingStop(LOCATION_LOADING, LOCATION_LOADING_TYPE));
       dispatch(alertShow(LOCATION_LOADING_FAILED, 'error'));
-      throw fetchCityLocationError;
+      throw getCityLocationError;
+    }
+  };
+
+export const getAddressLocation =
+  (address: string | [number, number]) => async (dispatch: Dispatch<any>) => {
+    dispatch(loadingStart(LOCATION_LOADING, LOCATION_LOADING_TYPE));
+    try {
+      const { location } = await getLocationReq(address);
+      dispatch(setAddressLocationAction(location));
+      dispatch(loadingStop(LOCATION_LOADING, LOCATION_LOADING_TYPE));
+    } catch (getAddressLocationError) {
+      dispatch(loadingStop(LOCATION_LOADING, LOCATION_LOADING_TYPE));
+      dispatch(alertShow(LOCATION_LOADING_FAILED, 'error'));
+      throw getAddressLocationError;
     }
   };

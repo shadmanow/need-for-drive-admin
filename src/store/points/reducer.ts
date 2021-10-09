@@ -1,5 +1,5 @@
-import { PointsActionTypes, PointsState, SetPointsAction } from './types';
 import { PointsStateDefault } from './default';
+import { PointsActionTypes, PointsState, SetPointsAction } from './types';
 
 export const pointsReducer = (
   state: PointsState = PointsStateDefault,

@@ -7,6 +7,6 @@ export interface TableColumn {
 
 export interface TableProps {
   elements: TableColumn[];
-  onClick: (rowIndex: number) => void;
+  onClick: (entity: any) => void;
   redrawable?: boolean;
 }

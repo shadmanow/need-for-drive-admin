@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { ChangeEvent, FC, useState } from 'react';
 import classNames from 'classnames';
 import './text-field.scss';
 
@@ -7,6 +7,7 @@ import { TextFieldProps } from './types';
 export const TextField: FC<TextFieldProps> = ({
   label,
   value,
+  name,
   onChange,
   error,
   type = 'text',
@@ -19,9 +20,9 @@ export const TextField: FC<TextFieldProps> = ({
     textfield__input_error: error && firstChanged
   });
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
-      onChange(e.target.value);
+      onChange({ name: e.target.name, value: e.target.value });
     }
     if (!firstChanged) {
       setFirstChanged(true);
@@ -34,6 +35,7 @@ export const TextField: FC<TextFieldProps> = ({
       <input
         autoComplete='off'
         type={type}
+        name={name}
         className={classes}
         value={value}
         onChange={handleChange}

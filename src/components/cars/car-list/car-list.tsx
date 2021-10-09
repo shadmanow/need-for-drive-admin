@@ -15,8 +15,8 @@ export const CarList: FC<{ cars: Car[] }> = ({ cars }) => {
   const [slicedCars, setSlicedCars] = useState<Car[]>([]);
   const history = useHistory();
 
-  const handleClick = (index: number) => {
-    history.push(`${ROUTES.CARS}/edit/${cars[index].id}`);
+  const handleClick = (car: Car) => {
+    history.push(`${ROUTES.CARS}/edit/${car.id}`);
   };
 
   return (

@@ -1,24 +1,34 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from '@store/hooks';
-import { selectOrders } from '@store/selectors';
+import { setCurrentOrder } from '@store/current-order/thunks';
+import { selectCurrentOrder, selectOrders } from '@store/selectors';
 import { Order } from '@store/orders/types';
 
 import { Container } from '@components/wrapper';
-import OrderSettings from '@components/orders/order-form';
+import OrderForm from '@components/orders/order-form';
 
 export const OrderAction: FC = () => {
   const { id } = useParams<{ id: string | undefined }>();
+
+  const dispatch = useDispatch();
   const orders = useAppSelector(selectOrders);
-  const order = useMemo<Order | undefined>(
-    () => orders.find(({ id: orderId }) => orderId === id),
-    [id, orders]
-  );
+  const currentOrder = useAppSelector(selectCurrentOrder);
+
+  useEffect(() => {
+    if (id) {
+      const order = orders.find(({ id: orderId }) => orderId === id);
+      if (order) {
+        dispatch(setCurrentOrder({ ...order } as Order));
+      }
+    }
+  }, []);
 
   return (
     <Container title='Редактирование заказа' className='order-action'>
-      {order && <OrderSettings order={order} />}
+      {currentOrder && <OrderForm />}
     </Container>
   );
 };

@@ -21,7 +21,8 @@ export const login = async (params: LoginParams): Promise<LoginData> => {
     });
     return {
       accessToken: response.data.access_token,
-      refreshToken: response.data.refresh_token
+      refreshToken: response.data.refresh_token,
+      expiresIn: response.data.expires_in
     };
   } catch (e: any) {
     if (axios.isAxiosError(e) && e.response?.status === 401) {
@@ -29,4 +30,23 @@ export const login = async (params: LoginParams): Promise<LoginData> => {
     }
     throw e;
   }
+};
+
+export const refreshToken = async (rToken: string): Promise<LoginData> => {
+  const response: LoginResponse = await baseApi.request({
+    method: 'POST',
+    url: '/api/auth/refresh',
+    data: {
+      refresh_token: rToken
+    },
+    headers: {
+      ...baseApi.defaults.headers,
+      Authorization: `Basic ${process.env.REACT_APP_API_BASIC_TOKEN}`
+    }
+  });
+  return {
+    accessToken: response.data.access_token,
+    refreshToken: response.data.refresh_token,
+    expiresIn: response.data.expires_in
+  };
 };

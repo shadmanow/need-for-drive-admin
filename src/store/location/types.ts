@@ -11,8 +11,11 @@ export interface Location {
   };
 }
 
-export interface LocationState {
+export interface LocationCityState {
   readonly city: Location | null;
+}
+
+export interface LocationAddressState {
   readonly address: Location | null;
 }
 

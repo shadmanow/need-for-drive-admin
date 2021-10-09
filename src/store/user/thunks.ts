@@ -9,7 +9,10 @@ import { loadingStart, loadingStop } from '@store/loadings/thunks';
 import {
   UserActionTypes,
   LoginSuccessAction,
-  LoginFailureAction
+  LoginFailureAction,
+  AUTH_LOADING,
+  AUTH_LOADING_FAILED,
+  AUTH_LOADING_SUCCESS
 } from './types';
 
 const loginSuccessAction = (
@@ -27,20 +30,24 @@ const loginFailureAction = (): LoginFailureAction => ({
 
 export const loginUser =
   (data: LoginParams) => async (dispatch: Dispatch<any>) => {
-    dispatch(loadingStart());
+    dispatch(loadingStart(AUTH_LOADING));
     try {
-      const { accessToken, refreshToken } = await login(data);
+      const { accessToken, refreshToken, expiresIn } = await login(data);
 
-      cookies.save('user', { accessToken, refreshToken }, { path: '/' });
+      cookies.save(
+        'user',
+        { accessToken, refreshToken, expiresIn: Date.now() + expiresIn * 1000 },
+        { path: '/', maxAge: 9999999 }
+      );
 
       dispatch(loginSuccessAction(accessToken, refreshToken));
-      dispatch(alertShow('Вы успешно вошли', 'success'));
-      dispatch(loadingStop());
+      dispatch(alertShow(AUTH_LOADING_SUCCESS, 'success'));
+      dispatch(loadingStop(AUTH_LOADING));
     } catch (authError) {
-      dispatch(loadingStop());
+      dispatch(loadingStop(AUTH_LOADING));
       dispatch(loginFailureAction());
       if (authError instanceof UnauthorizedError) {
-        dispatch(alertShow('Неверная почта или пароль', 'error'));
+        dispatch(alertShow(AUTH_LOADING_FAILED, 'error'));
       } else {
         dispatch(alertShow('Неизвестная ошибка', 'error'));
       }
@@ -53,9 +60,16 @@ export const logoutUser = () => async (dispatch: Dispatch<any>) => {
 };
 
 export const checkUser = () => async (dispatch: Dispatch<any>) => {
+  dispatch(loadingStart(AUTH_LOADING));
   const user = cookies.load('user');
   if (user) {
-    const { accessToken, refreshToken } = user;
-    dispatch(loginSuccessAction(accessToken, refreshToken));
+    const { accessToken, refreshToken, expiresIn } = user;
+    if (expiresIn > Date.now()) {
+      dispatch(loginSuccessAction(accessToken, refreshToken));
+    } else {
+      dispatch(alertShow('Сессия истекла. Пожалуйста перезайдите', 'error'));
+      cookies.remove('user', { path: '/' });
+    }
   }
+  dispatch(loadingStop(AUTH_LOADING));
 };

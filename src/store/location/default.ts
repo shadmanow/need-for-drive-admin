@@ -1,6 +1,9 @@
-import { LocationState } from './types';
+import { LocationAddressState, LocationCityState } from './types';
 
-export const LocationStateDefault: LocationState = {
-  city: null,
+export const LocationCityStateDefault: LocationCityState = {
+  city: null
+};
+
+export const LocationAddressStateDefault: LocationAddressState = {
   address: null
 };

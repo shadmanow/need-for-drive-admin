@@ -14,6 +14,7 @@ export interface LoginParams {
 }
 
 export interface LoginData {
+  expiresIn: number;
   accessToken: string;
   refreshToken: string;
 }

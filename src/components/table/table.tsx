@@ -13,8 +13,8 @@ export const Table: FC<TableProps> = ({ elements, onClick, redrawable }) => {
   });
 
   const handleClick = useCallback(
-    (index: number) => {
-      if (onClick) onClick(index);
+    (entity) => {
+      if (onClick) onClick(entity);
     },
     [onClick]
   );
@@ -37,7 +37,7 @@ export const Table: FC<TableProps> = ({ elements, onClick, redrawable }) => {
 
   const rows = useMemo(() => {
     if (!elements.length) return null;
-    return elements.map((element, index) => {
+    return elements.map((element) => {
       const columns = getEntries(element).reduce<JSX.Element[]>(
         (arr, [key, value]) => {
           if (key !== 'id') {
@@ -57,7 +57,7 @@ export const Table: FC<TableProps> = ({ elements, onClick, redrawable }) => {
         <tr
           key={`table-${element.id}`}
           className='table__tr'
-          onClick={() => handleClick(index)}
+          onClick={() => handleClick(element)}
         >
           {columns}
         </tr>
